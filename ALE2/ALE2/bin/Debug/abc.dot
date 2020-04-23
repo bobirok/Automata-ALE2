@@ -1,0 +1,12 @@
+digraph myAutomaton {
+rankdir=LR;
+"" [shape=none]
+"S" [shape=circle]
+"B" [shape=circle]
+"C" [shape=doublecircle]
+
+"S" -> "S"[label="a"]
+"S" -> "B"[label="b"]
+"C" -> "C"[label="a"]
+"B" -> "C"[label="b"]
+}

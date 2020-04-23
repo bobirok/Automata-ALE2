@@ -32,10 +32,10 @@
             this.lblFunction = new System.Windows.Forms.Label();
             this.pbAutomata = new System.Windows.Forms.PictureBox();
             this.gbDfa = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnActual = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnExpected = new System.Windows.Forms.Button();
-            this.btnActual = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnParse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbAutomata)).BeginInit();
             this.gbDfa.SuspendLayout();
@@ -80,14 +80,14 @@
             this.gbDfa.TabStop = false;
             this.gbDfa.Text = "DFA";
             // 
-            // label1
+            // btnActual
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Expected";
+            this.btnActual.Enabled = false;
+            this.btnActual.Location = new System.Drawing.Point(70, 49);
+            this.btnActual.Name = "btnActual";
+            this.btnActual.Size = new System.Drawing.Size(47, 23);
+            this.btnActual.TabIndex = 5;
+            this.btnActual.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -100,19 +100,21 @@
             // 
             // btnExpected
             // 
+            this.btnExpected.Enabled = false;
             this.btnExpected.Location = new System.Drawing.Point(70, 15);
             this.btnExpected.Name = "btnExpected";
             this.btnExpected.Size = new System.Drawing.Size(47, 23);
             this.btnExpected.TabIndex = 4;
             this.btnExpected.UseVisualStyleBackColor = true;
             // 
-            // btnActual
+            // label1
             // 
-            this.btnActual.Location = new System.Drawing.Point(70, 49);
-            this.btnActual.Name = "btnActual";
-            this.btnActual.Size = new System.Drawing.Size(47, 23);
-            this.btnActual.TabIndex = 5;
-            this.btnActual.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Expected";
             // 
             // btnParse
             // 
@@ -122,6 +124,7 @@
             this.btnParse.TabIndex = 4;
             this.btnParse.Text = "Parse";
             this.btnParse.UseVisualStyleBackColor = true;
+            this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
             // 
             // Form1
             // 

@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Word.cs" />
+    <Compile Include="DfaController.cs" />
     <Compile Include="ImageBuilder.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

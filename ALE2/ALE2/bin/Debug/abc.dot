@@ -8,5 +8,7 @@ rankdir=LR;
 "S" -> "S"[label="a"]
 "S" -> "B"[label="b"]
 "C" -> "C"[label="a"]
+"C" -> "S"[label="b"]
 "B" -> "C"[label="b"]
+"B" -> "B"[label="a"]
 }

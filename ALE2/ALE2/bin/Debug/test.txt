@@ -1,3 +1,4 @@
+//NOT DFA
 alphabet: abc
 states: S,B,C
 final: C
@@ -5,5 +6,50 @@ transitions:
 S,a --> S
 S,b --> B
 C,a --> C
-B,b --C
+B,b --> C
 end;
+
+// NOT DFA
+alphabet: abc
+states: S,B,C
+final: C
+transitions:
+S,a --> S
+S,b --> B
+C,a --> C
+C,b --> S
+B,b --> C
+B,a --> B
+end;
+
+// DFA
+alphabet: ab
+states: S,B,C
+final: C
+transitions:
+S,a --> S
+S,b --> B
+C,a --> C
+C,b --> S
+B,b --> C
+B,a --> B
+end;
+
+alphabet: ab
+states: q0
+final: q0
+transitions:
+q0,a --> q0
+q0,b --> q0
+end.
+dfa: y
+finite: n
+words:
+_,n
+a,y
+aaaaa,y
+b,y
+bbb,y
+babaaabb,y
+bbbaabababab,y
+end.

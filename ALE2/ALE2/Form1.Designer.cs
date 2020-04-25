@@ -37,6 +37,8 @@
             this.btnExpected = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnParse = new System.Windows.Forms.Button();
+            this.rtbWords = new System.Windows.Forms.RichTextBox();
+            this.lblWords = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbAutomata)).BeginInit();
             this.gbDfa.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +65,7 @@
             // 
             this.pbAutomata.Location = new System.Drawing.Point(266, 28);
             this.pbAutomata.Name = "pbAutomata";
-            this.pbAutomata.Size = new System.Drawing.Size(493, 427);
+            this.pbAutomata.Size = new System.Drawing.Size(432, 384);
             this.pbAutomata.TabIndex = 2;
             this.pbAutomata.TabStop = false;
             // 
@@ -126,11 +128,30 @@
             this.btnParse.UseVisualStyleBackColor = true;
             this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
             // 
+            // rtbWords
+            // 
+            this.rtbWords.Location = new System.Drawing.Point(745, 28);
+            this.rtbWords.Name = "rtbWords";
+            this.rtbWords.Size = new System.Drawing.Size(215, 386);
+            this.rtbWords.TabIndex = 5;
+            this.rtbWords.Text = "";
+            // 
+            // lblWords
+            // 
+            this.lblWords.AutoSize = true;
+            this.lblWords.Location = new System.Drawing.Point(742, 9);
+            this.lblWords.Name = "lblWords";
+            this.lblWords.Size = new System.Drawing.Size(41, 13);
+            this.lblWords.TabIndex = 6;
+            this.lblWords.Text = "Words:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(818, 533);
+            this.ClientSize = new System.Drawing.Size(994, 522);
+            this.Controls.Add(this.lblWords);
+            this.Controls.Add(this.rtbWords);
             this.Controls.Add(this.btnParse);
             this.Controls.Add(this.gbDfa);
             this.Controls.Add(this.pbAutomata);
@@ -157,6 +178,8 @@
         private System.Windows.Forms.Button btnExpected;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnParse;
+        private System.Windows.Forms.RichTextBox rtbWords;
+        private System.Windows.Forms.Label lblWords;
     }
 }
 

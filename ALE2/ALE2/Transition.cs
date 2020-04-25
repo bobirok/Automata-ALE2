@@ -8,15 +8,15 @@ namespace ALE2
 {
     public class Transition
     {
-        public State _initialState { get; }
-        public State _destinationState { get; }
-        public Letter _connectingLetter { get; }
+        public State initialState { get; }
+        public State destinationState { get; }
+        public Letter connectingLetter { get; }
 
         public Transition(State initialState, State destinationState, Letter connectionLetter)
         {
-            this._initialState = initialState;
-            this._destinationState = destinationState;
-            this._connectingLetter = connectionLetter;
+            this.initialState = initialState;
+            this.destinationState = destinationState;
+            this.connectingLetter = connectionLetter;
         }
     }
 }

@@ -37,7 +37,7 @@ namespace ALE2
             string statesDot = "\"\"" + " [shape=none]\n";
             foreach (State state in states)
             {
-                statesDot += "\"" + state._data + "\"" + " " +
+                statesDot += "\"" + state.data + "\"" + " " +
                              "[shape=" + state.GetShapeString() + "]\n";
             }
 
@@ -49,9 +49,9 @@ namespace ALE2
             string transitionsDot = "";
             foreach (Transition transition in transitions)
             {
-                transitionsDot += "\"" + transition._initialState._data + "\"" 
-                                  + " -> " + "\"" + transition._destinationState._data + "\""
-                                  + "[label=" + "\"" + transition._connectingLetter._data + "\"" + "]\n";
+                transitionsDot += "\"" + transition.initialState.data + "\"" 
+                                  + " -> " + "\"" + transition.destinationState.data + "\""
+                                  + "[label=" + "\"" + transition.connectingLetter.data + "\"" + "]\n";
             }
 
             return transitionsDot;

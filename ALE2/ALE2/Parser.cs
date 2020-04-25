@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ALE2
 {
@@ -35,24 +32,28 @@ namespace ALE2
         {
             for (int i = 0; i < statesString.Length; i++)
             {
-                if (!isEscapableChar(statesString[i]))
+                string uniqueStateString = "";
+                while (i < statesString.Length && !isEscapableChar(statesString[i]))
                 {
-                    State state = new State(statesString[i].ToString());
-                    this._states.Add(state);
+                    uniqueStateString += statesString[i];
+                    i++;
                 }
+                State state = new State(uniqueStateString);
+                this._states.Add(state);
             }
         }
 
         public void parseFinalStates(string finalStatesString)
         {
-            for (int i = 0; i < finalStatesString.Length; i++)
-            {
-                if (!isEscapableChar(finalStatesString[i]))
-                {
-                    this._states.Find(x => x._data == finalStatesString[i].ToString())
-                        .isFinalState = true;
-                }
-            }
+            //for (int i = 0; i < finalStatesString.Length; i++)
+            //{
+            //    if (!isEscapableChar(finalStatesString[i]))
+            //    {
+            //        this._states.Find(x => x.data == finalStatesString[i].ToString())
+            //            .isFinalState = true;
+            //    }
+            //}
+            this._states.Find(_ => _.data == finalStatesString).isFinalState = true;
         }
 
         public void parseTransition(string transitionString)
@@ -85,17 +86,49 @@ namespace ALE2
                 i++;
             }
 
+            this.addOutgoingLetterToState(initalStateString, letter);
+
             Transition transition = this.initializeTransition(initalStateString, finalStateString, letter);
 
             this._transitions.Add(transition);
         }
 
+        public bool wordExists(string word, State currentState)
+        {
+            if (word.Length == 0) 
+            {
+                if(currentState.isFinalState)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+            if (!currentState.outgoingLetters.Any(_ => _.data == word[0])) { return false; }
+            else
+            {
+                Transition currentTransition = this._transitions.Find(_ => _.initialState.data == currentState.data 
+                    && _.connectingLetter.data == word[0]);
+                currentState = currentTransition.destinationState;
+                return wordExists(word.Substring(1), currentState);
+            }
+        }
+
         private Transition initializeTransition(string initialStateString, string destinationStateString, char letterString)
         {
-            State initialState = new State(initialStateString);
-            State destinationState = new State(destinationStateString);
-            Letter letter = new Letter(letterString);
+            State initialState = this._states.Find(_ => _.data == initialStateString);
+            State destinationState = this._states.Find(_ => _.data == destinationStateString);
+            Letter letter = this._alphabet.Find(_ => _.data == letterString);
             return new Transition(initialState, destinationState, letter);
+        }
+
+        private void addOutgoingLetterToState(string stateString, char letterChar)
+        {
+            State state = this._states.Find(_ => _.data == stateString);
+            Letter letter = this._alphabet.Find(_ => _.data == letterChar);
+
+            state.outgoingLetters.Add(letter);
         }
 
         private bool isEscapableChar(char charToCheck)

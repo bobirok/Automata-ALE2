@@ -45,22 +45,13 @@ namespace ALE2
 
         public void parseFinalStates(string finalStatesString)
         {
-            //for (int i = 0; i < finalStatesString.Length; i++)
-            //{
-            //    if (!isEscapableChar(finalStatesString[i]))
-            //    {
-            //        this._states.Find(x => x.data == finalStatesString[i].ToString())
-            //            .isFinalState = true;
-            //    }
-            //}
             this._states.Find(_ => _.data == finalStatesString).isFinalState = true;
         }
 
         public void parseTransition(string transitionString)
         {
-            string initalStateString = "";
-            string finalStateString = "";
-            char letter = ' ';
+            string initalStateString = "", finalStateString = "";
+            char letter;
             int i = 0;
 
             while (transitionString[i] != ',')
@@ -108,11 +99,38 @@ namespace ALE2
             if (!currentState.outgoingLetters.Any(_ => _.data == word[0])) { return false; }
             else
             {
-                Transition currentTransition = this._transitions.Find(_ => _.initialState.data == currentState.data 
+                List<Transition> possibleTransitions = this._transitions.FindAll(_ => _.initialState.data == currentState.data 
                     && _.connectingLetter.data == word[0]);
-                currentState = currentTransition.destinationState;
-                return wordExists(word.Substring(1), currentState);
+                if (possibleTransitions.Count > 1)
+                {
+                    //foreach (Transition transition in possibleTransitions)
+                    //{
+                    //    if(wordExists(word.Substring(1), transition.destinationState))
+                    //    {
+                    //        return true;
+                    //    }
+                    //}
+                    //return false;
+                    return this.handleMultipleWordTransitions(word, possibleTransitions);
+                }
+                else
+                {
+                    currentState = possibleTransitions[0].destinationState;
+                    return wordExists(word.Substring(1), currentState);
+                }
             }
+        }
+
+        private bool handleMultipleWordTransitions(string word, List<Transition> transitions)
+        {
+            foreach (Transition transition in transitions)
+            {
+                if (wordExists(word.Substring(1), transition.destinationState))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private Transition initializeTransition(string initialStateString, string destinationStateString, char letterString)

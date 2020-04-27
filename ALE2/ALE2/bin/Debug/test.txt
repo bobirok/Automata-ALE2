@@ -53,3 +53,22 @@ bbb,y
 babaaabb,y
 bbbaabababab,y
 end.
+
+alphabet: ab
+states: S,B,C
+final: C
+transitions:
+S,a --> S
+S,b --> B
+S,b --> S
+C,a --> C
+C,b --> S
+B,b --> C
+B,a --> B
+end;
+
+words:
+bb, y
+bab, y
+bbb, y
+end.

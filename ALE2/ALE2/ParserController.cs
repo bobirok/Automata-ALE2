@@ -47,13 +47,7 @@ namespace ALE2
                 } else if(lines[i].Contains("dfa"))
                 {
                     string dfa = lines[i].Substring(5);
-                    if(dfa[0] == 'y')
-                    {
-                        this.expectedDfa = true;
-                    } else if(dfa[0] == 'n')
-                    {
-                        this.expectedDfa = false;
-                    }
+                    this.expectedDfa = this.parseExpectedValue(dfa[0]);
                 } else if(lines[i].Contains("words"))
                 {
                     i++;
@@ -62,10 +56,23 @@ namespace ALE2
                         int endIndex = lines[i].IndexOf(',');
                         string word = lines[i].Substring(0, endIndex);
                         bool wordExists = this._parser.wordExists(word, this._states[0]);
-                        this._words.Add(new Word(word, wordExists));
+                        char givenWordExpectedExistanceInChar = lines[i][endIndex + 2];
+                        bool expectedWordExistance = this.parseExpectedValue(givenWordExpectedExistanceInChar);
+                        this._words.Add(new Word(word, wordExists, expectedWordExistance));
                         i++;
                     }
                 }
+            }
+        }
+
+        private bool parseExpectedValue(char expectedInChar)
+        {
+            if(expectedInChar == 'y')
+            {
+                return true;
+            } else
+            {
+                return false;
             }
         }
     }

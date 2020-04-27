@@ -103,14 +103,6 @@ namespace ALE2
                     && _.connectingLetter.data == word[0]);
                 if (possibleTransitions.Count > 1)
                 {
-                    //foreach (Transition transition in possibleTransitions)
-                    //{
-                    //    if(wordExists(word.Substring(1), transition.destinationState))
-                    //    {
-                    //        return true;
-                    //    }
-                    //}
-                    //return false;
                     return this.handleMultipleWordTransitions(word, possibleTransitions);
                 }
                 else

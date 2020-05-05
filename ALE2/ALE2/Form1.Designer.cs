@@ -39,8 +39,12 @@
             this.btnParse = new System.Windows.Forms.Button();
             this.rtbWords = new System.Windows.Forms.RichTextBox();
             this.lblWords = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnParseRE = new System.Windows.Forms.Button();
+            this.tbRegularExpression = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbAutomata)).BeginInit();
             this.gbDfa.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -63,7 +67,7 @@
             // 
             // pbAutomata
             // 
-            this.pbAutomata.Location = new System.Drawing.Point(266, 28);
+            this.pbAutomata.Location = new System.Drawing.Point(266, 51);
             this.pbAutomata.Name = "pbAutomata";
             this.pbAutomata.Size = new System.Drawing.Size(432, 384);
             this.pbAutomata.TabIndex = 2;
@@ -145,11 +149,44 @@
             this.lblWords.TabIndex = 6;
             this.lblWords.Text = "Words:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnParseRE);
+            this.groupBox1.Controls.Add(this.tbRegularExpression);
+            this.groupBox1.Location = new System.Drawing.Point(346, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(276, 40);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Regular expression";
+            // 
+            // btnParseRE
+            // 
+            this.btnParseRE.Location = new System.Drawing.Point(181, 14);
+            this.btnParseRE.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnParseRE.Name = "btnParseRE";
+            this.btnParseRE.Size = new System.Drawing.Size(73, 20);
+            this.btnParseRE.TabIndex = 1;
+            this.btnParseRE.Text = "Parse";
+            this.btnParseRE.UseVisualStyleBackColor = true;
+            this.btnParseRE.Click += new System.EventHandler(this.btnParseRE_Click);
+            // 
+            // tbRegularExpression
+            // 
+            this.tbRegularExpression.Location = new System.Drawing.Point(3, 16);
+            this.tbRegularExpression.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbRegularExpression.Name = "tbRegularExpression";
+            this.tbRegularExpression.Size = new System.Drawing.Size(165, 20);
+            this.tbRegularExpression.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 522);
+            this.ClientSize = new System.Drawing.Size(976, 508);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblWords);
             this.Controls.Add(this.rtbWords);
             this.Controls.Add(this.btnParse);
@@ -162,6 +199,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbAutomata)).EndInit();
             this.gbDfa.ResumeLayout(false);
             this.gbDfa.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,6 +219,9 @@
         private System.Windows.Forms.Button btnParse;
         private System.Windows.Forms.RichTextBox rtbWords;
         private System.Windows.Forms.Label lblWords;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnParseRE;
+        private System.Windows.Forms.TextBox tbRegularExpression;
     }
 }
 

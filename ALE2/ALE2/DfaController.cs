@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ALE2
 {
@@ -10,6 +8,8 @@ namespace ALE2
     {
         public bool isDfa(List<State> states, List<Letter> alphabet)
         {
+            if (states.Exists(_ => _.outgoingLetters.Exists(x => x.data == '_'))) { return false; }
+
             foreach (State state in states)
             {
                 if(state.outgoingLetters.Intersect(alphabet).ToList().Count != alphabet.Count)

@@ -51,17 +51,30 @@ namespace ALE2
                 } else if(lines[i].Contains("words"))
                 {
                     i++;
-                    while (!lines[i].Contains("end"))
-                    {
-                        int endIndex = lines[i].IndexOf(',');
-                        string word = lines[i].Substring(0, endIndex);
-                        bool wordExists = this._parser.wordExists(word, this._states[0]);
-                        char givenWordExpectedExistanceInChar = lines[i][endIndex + 2];
-                        bool expectedWordExistance = this.parseExpectedValue(givenWordExpectedExistanceInChar);
-                        this._words.Add(new Word(word, wordExists, expectedWordExistance));
-                        i++;
-                    }
+                        this.handleLineWord(lines, i);
                 }
+            }
+        }
+
+        private void handleLineWord(string[] lines, int i)
+        {
+            while (!lines[i].Contains("end"))
+            {
+                int endIndex = lines[i].IndexOf(',');
+                string word = lines[i].Substring(0, endIndex);
+                bool wordExists = this._parser.wordExists(word, this._states[0]);
+
+                while (_parser.isEscapableChar(lines[i][endIndex]))
+                {
+                    endIndex++;
+                }
+                char givenWordExpectedExistanceInChar = lines[i][endIndex];
+
+                bool expectedWordExistance = this.parseExpectedValue(givenWordExpectedExistanceInChar);
+
+                this._words.Add(new Word(word, wordExists, expectedWordExistance));
+
+                i++;
             }
         }
 

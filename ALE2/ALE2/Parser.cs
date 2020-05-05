@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ALE2
@@ -8,6 +9,7 @@ namespace ALE2
         private List<Letter> _alphabet;
         private List<State> _states;
         private List<Transition> _transitions;
+        private const char lambda = '_';
 
         public Parser(List<Letter> alphabet, List<State> states, List<Transition> transitions)
         {
@@ -51,35 +53,41 @@ namespace ALE2
         public void parseTransition(string transitionString)
         {
             string initalStateString = "", finalStateString = "";
-            char letter;
-            int i = 0;
+            char letter = ' ';
+            Transition transition = new Transition(null, null, null);
 
-            while (transitionString[i] != ',')
+            for (int k = 0; k < transitionString.Length; k++)
             {
-                initalStateString += transitionString[i];
-                i++;
-            }
-
-            i++;
-
-            letter = transitionString[i];
-
-            i++;
-
-            while (isEscapableChar(transitionString[i]))
-            {
-                i++;
-            }
-
-            while (i < transitionString.Length)
-            {
-                finalStateString += transitionString[i];
-                i++;
+                if(isEscapableChar(transitionString[k])) continue; 
+                if(isStateChar(transitionString[k]) && transition.initialState == null && transition.destinationState == null)
+                {
+                    while(k < transitionString.Length && !isEscapableChar(transitionString[k]))
+                    {
+                        initalStateString += transitionString[k];
+                        k++;
+                    }
+                    transition.initialState = this._states.Find(_ => _.data == initalStateString);
+                } else if(isStateChar(transitionString[k]) && transition.initialState != null && transition.destinationState == null)
+                {
+                    while (k < transitionString.Length && !isEscapableChar(transitionString[k]))
+                    {
+                        finalStateString += transitionString[k];
+                        k++;
+                    }
+                    transition.destinationState = this._states.Find(_ => _.data == finalStateString);
+                } else if(isLetterChar(transitionString[k]) && transition.connectingLetter == null)
+                {
+                    letter = transitionString[k];
+                    transition.connectingLetter = this._alphabet.Find(_ => _.data == letter);
+                } else if(isEpsilon(transitionString[k])) {
+                    Letter epsilonLetter = new Letter(lambda);
+                    transition.connectingLetter = epsilonLetter;
+                    this._alphabet.Add(epsilonLetter);
+                    letter = epsilonLetter.data;
+                }
             }
 
             this.addOutgoingLetterToState(initalStateString, letter);
-
-            Transition transition = this.initializeTransition(initalStateString, finalStateString, letter);
 
             this._transitions.Add(transition);
         }
@@ -96,11 +104,25 @@ namespace ALE2
                     return false;
                 }
             }
-            if (!currentState.outgoingLetters.Any(_ => _.data == word[0])) { return false; }
+            if (!this.stateContainsLetter(currentState, word[0]) || word[0] == lambda)
+            {
+                if (this.stateContainsLetter(currentState, lambda))
+                {
+                    List<Transition> possibleTransitions = this._transitions.FindAll(_ => _.initialState.data == currentState.data
+                        && _.connectingLetter.data == lambda);
+
+                    return this.handleMultipleWordTransitions(word, possibleTransitions);
+                }
+                return false;
+            }
+            if (!currentState.outgoingLetters.Any(_ => _.data == word[0])) {
+               
+                return false; 
+            }
             else
             {
-                List<Transition> possibleTransitions = this._transitions.FindAll(_ => _.initialState.data == currentState.data 
-                    && _.connectingLetter.data == word[0]);
+                List<Transition> possibleTransitions = this._transitions.FindAll(_ => (_.initialState.data == currentState.data 
+                    && _.connectingLetter.data == word[0]) || (_.initialState.data == currentState.data && _.connectingLetter.data == lambda));
                 if (possibleTransitions.Count > 1)
                 {
                     return this.handleMultipleWordTransitions(word, possibleTransitions);
@@ -125,14 +147,6 @@ namespace ALE2
             return false;
         }
 
-        private Transition initializeTransition(string initialStateString, string destinationStateString, char letterString)
-        {
-            State initialState = this._states.Find(_ => _.data == initialStateString);
-            State destinationState = this._states.Find(_ => _.data == destinationStateString);
-            Letter letter = this._alphabet.Find(_ => _.data == letterString);
-            return new Transition(initialState, destinationState, letter);
-        }
-
         private void addOutgoingLetterToState(string stateString, char letterChar)
         {
             State state = this._states.Find(_ => _.data == stateString);
@@ -141,9 +155,49 @@ namespace ALE2
             state.outgoingLetters.Add(letter);
         }
 
-        private bool isEscapableChar(char charToCheck)
+        private bool isStateChar(char charToCheck)
+        {
+            if(charToCheck >= 'A' && charToCheck <= 'Z')
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool isLetterChar(char charToCheck)
+        {
+            if(charToCheck >= 'a' && charToCheck <= 'z')
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool isEpsilon(char charToCheck)
+        {
+            if(charToCheck == '_')
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool isEscapableChar(char charToCheck)
         {
             if (charToCheck == ' ' || charToCheck == ',' || charToCheck == '-' || charToCheck == '>')
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool stateContainsLetter(State currentState, char letterToCheck)
+        {
+            if(currentState.outgoingLetters.Any(_ => _.data == letterToCheck))
             {
                 return true;
             }

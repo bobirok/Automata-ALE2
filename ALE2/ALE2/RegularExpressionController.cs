@@ -3,50 +3,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ALE2
 {
     public class RegularExpressionController
     {
         private static int stateCounter = 0;
-        private List<Transition> _transitions = new List<Transition>();
-        private State front, tail;
+        public State front { get; set; }
+        public State tail { get; set; }
 
-        public List<Transition> getNdfaFromRegularExpression(RegularExpression re)
+        public RegularExpressionController()
         {
-            if (isLetterChar(re.letter.data))
+            stateCounter = 0;
+        }
+
+        
+        public RegularExpression GetNdfaFromRegularExpression(ref string formula)
+        {
+            if(isLetterChar(formula[0]))
             {
-                Transition letterTransition = letterRule(re.letter);
+                Letter letter = new Letter(formula[0]);
 
-                this._transitions.Add(letterTransition);
-
-                return this._transitions;
-            }
-            else if (re.letter.data == '|')
+                return this.letterRule(letter);
+            } else if(formula[0] == '.')
             {
-                Transition t1 = getNdfaFromRegularExpression(re.left)[0];
-                Transition t2 = getNdfaFromRegularExpression(re.right)[0];
+                formula = formula.Substring(1);
+                RegularExpression firstRegularExpression = this.GetNdfaFromRegularExpression(ref formula);
 
-                this._transitions = this._transitions.Concat(this.orRule(t1, t2)).ToList();
+                formula = formula.Substring(1);
+                RegularExpression secondRegularExpression = this.GetNdfaFromRegularExpression(ref formula);
 
-                return this._transitions;
-            }
-            else if (re.letter.data == '.')
+                return this.andRule(firstRegularExpression, secondRegularExpression);
+            } else if(formula[0] == '|')
             {
-                Transition t1 = getNdfaFromRegularExpression(re.left)[0];
-                Transition t2 = getNdfaFromRegularExpression(re.right)[1];
+                formula = formula.Substring(1);
+                RegularExpression firstRegularExpression = this.GetNdfaFromRegularExpression(ref formula);
 
-                this._transitions = this._transitions.Concat(this.andRule(t1, t2)).ToList();
+                formula = formula.Substring(1);
+                RegularExpression secondRegularExpression = this.GetNdfaFromRegularExpression(ref formula);
 
-                return this._transitions;
-            }
-            else
+                return this.orRule(firstRegularExpression, secondRegularExpression);
+            } else if(formula[0] == '*')
             {
-                Transition t1 = getNdfaFromRegularExpression(re.left)[0];
+                formula = formula.Substring(1);
+                RegularExpression firstRegularExpression = this.GetNdfaFromRegularExpression(ref formula);
 
-                this._transitions = this._transitions.Concat(this.starRule(t1)).ToList();
-
-                return this._transitions;
+                return starRule(firstRegularExpression);
+            } else
+            {
+                formula = formula.Substring(1);
+                return GetNdfaFromRegularExpression(ref formula);
             }
         }
 
@@ -75,67 +82,88 @@ namespace ALE2
             return alphabet.GroupBy(_ => _.data).Select(_ => _.First()).ToList();
         }
 
-        private Transition letterRule(Letter letter)
+        private RegularExpression letterRule(Letter letter)
         {
-            State s1 = new State("S" + stateCounter++.ToString());
-            State s2 = new State("S" + stateCounter++.ToString());
-            s2.isFinalState = true;
+            RegularExpression letterRegularExpression = new RegularExpression(letter);
+            State initialState = new State("S" + stateCounter++.ToString());
+            State finalState = new State("S" + stateCounter++.ToString());
+            finalState.isFinalState = true;
+            Transition transition = new Transition(initialState, finalState, letter);
+            letterRegularExpression.transitions.Add(transition);
+            letterRegularExpression.initial = initialState;
+            letterRegularExpression.final = finalState;
+            return letterRegularExpression;
+        }
 
-            if(this.front == null & this.tail == null)
+        private RegularExpression andRule(RegularExpression firstRegularExpression, RegularExpression secondRegularExpression)
+        {
+            firstRegularExpression.final.isFinalState = false;
+
+            RegularExpression andRegularExpression = new RegularExpression(new Letter('.'));
+
+            List<Transition> initialTransitions = secondRegularExpression.transitions.FindAll(_ => _.initialState == secondRegularExpression.initial);
+
+            foreach (Transition transition in initialTransitions)
             {
-                this.front = s1;
-                this.tail = s2;
+                transition.initialState = firstRegularExpression.final;
             }
 
-            return new Transition(s1, s2, letter);
+            andRegularExpression.initial = firstRegularExpression.initial;
+            andRegularExpression.final = secondRegularExpression.final;
+
+            andRegularExpression.transitions = andRegularExpression.transitions.Concat(firstRegularExpression.transitions).ToList();
+            andRegularExpression.transitions = andRegularExpression.transitions.Concat(secondRegularExpression.transitions).ToList();
+
+            return andRegularExpression;
         }
 
-        private List<Transition> andRule(Transition t1, Transition t2)
+        private RegularExpression orRule(RegularExpression firstRegularExpression, RegularExpression secondRegularExpression)
         {
-            t1.destinationState.isFinalState = false;
-            t2.initialState = t1.destinationState;
-            this.front = t1.initialState;
-            this.tail = t2.destinationState;
-            return new List<Transition>();
-        }
-
-        private List<Transition> orRule(Transition t1, Transition t2)
-        {
+            firstRegularExpression.final.isFinalState = false;
+            secondRegularExpression.final.isFinalState = false;
             State s1 = new State("S" + stateCounter++.ToString());
             State s2 = new State("S" + stateCounter++.ToString());
 
             s2.isFinalState = true;
 
-            Transition newTransition1 = new Transition(s1, t1.initialState, new Letter('_'));
-            Transition newTransition2 = new Transition(s1, t2.initialState, new Letter('_'));
+            Transition newTransition1 = new Transition(s1, firstRegularExpression.initial, new Letter('_'));
+            Transition newTransition2 = new Transition(s1, secondRegularExpression.initial, new Letter('_'));
 
-            Transition newTransition3 = new Transition(t1.destinationState, s2, new Letter('_'));
-            Transition newTransition4 = new Transition(t2.destinationState, s2, new Letter('_'));
+            Transition newTransition3 = new Transition(firstRegularExpression.final, s2, new Letter('_'));
+            Transition newTransition4 = new Transition(secondRegularExpression.final, s2, new Letter('_'));
 
-            t1.destinationState.isFinalState = false;
-            t2.destinationState.isFinalState = false;
+            RegularExpression orRegularExpression = new RegularExpression(new Letter('|'));
+            orRegularExpression.initial = s1;
+            orRegularExpression.final = s2;
+            orRegularExpression.transitions = orRegularExpression.transitions.Concat(firstRegularExpression.transitions).ToList();
+            orRegularExpression.transitions = orRegularExpression.transitions.Concat(secondRegularExpression.transitions).ToList();
+            orRegularExpression.transitions.AddRange(new List<Transition> { newTransition1, newTransition2, newTransition3, newTransition4 });
 
-            return new List<Transition> { newTransition1, newTransition2, newTransition3, newTransition4 };
+            return orRegularExpression;
         }
 
-        private List<Transition> starRule(Transition t1)
+        private RegularExpression starRule(RegularExpression firstRegularExpression)
         {
             State s1 = new State("S" + stateCounter++.ToString());
             State s2 = new State("S" + stateCounter++.ToString());
 
-            s2.isFinalState = true;
-            //t1.destinationState.isFinalState = false;
-            s2.isFinalState = false;
+            firstRegularExpression.final.isFinalState = false;
 
-            Transition newTransition1 = new Transition(s1, this.front, new Letter('_'));
+            s2.isFinalState = true;
+
+            Transition newTransition1 = new Transition(s1, firstRegularExpression.initial, new Letter('_'));
             Transition newTransition2 = new Transition(s1, s2, new Letter('_'));
-            Transition newTransition3 = new Transition(this.tail, this.front, new Letter('_'));
-            Transition newTransition4 = new Transition(this.tail, s2, new Letter('_'));
+            Transition newTransition3 = new Transition(firstRegularExpression.final, firstRegularExpression.initial, new Letter('_'));
+            Transition newTransition4 = new Transition(firstRegularExpression.final, s2, new Letter('_'));
 
-            this.front = s1;
-            this.tail = s2;
+            RegularExpression starRegularExpression = new RegularExpression(new Letter('*'));
+            starRegularExpression.initial = s1;
+            starRegularExpression.final = s2;
 
-            return new List<Transition> { newTransition1, newTransition2, newTransition3, newTransition4 };
+            starRegularExpression.transitions = starRegularExpression.transitions.Concat(firstRegularExpression.transitions).ToList();
+            starRegularExpression.transitions.AddRange(new List<Transition> { newTransition1, newTransition2, newTransition3, newTransition4 });
+
+            return starRegularExpression;
         }
 
         private bool isLetterChar(char charToCheck)

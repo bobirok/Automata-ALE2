@@ -13,6 +13,11 @@ namespace ALE2
         public RegularExpression left { get; set; }
         public RegularExpression right { get; set;}
 
+        public List<Transition> transitions { get; set; } = new List<Transition>();
+
+        public State initial { get; set; }
+        public State final { get; set; }
+
         public RegularExpression(Letter letter) 
         {
             this.letter = letter;

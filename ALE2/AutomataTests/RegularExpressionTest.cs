@@ -24,7 +24,7 @@ namespace AutomataTests
             RegularExpressionController regularExpressionController = new RegularExpressionController();
 
             // act 
-            transitions = regularExpressionController.getNdfaFromRegularExpression(re3);
+            transitions = regularExpressionController.GetNdfaFromRegularExpression(re3);
 
             // assert
             Assert.AreEqual(transitions.Count, 2);

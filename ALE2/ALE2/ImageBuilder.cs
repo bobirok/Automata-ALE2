@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ALE2
@@ -34,7 +30,7 @@ namespace ALE2
 
         private string buildStatesString(List<State> states)
         {
-            string statesDot = "\"\"" + " [shape=none]\n";
+            string statesDot = "\" \"" + " [shape=none]\n";
             foreach (State state in states)
             {
                 statesDot += "\"" + state.data + "\"" + " " +
@@ -46,7 +42,7 @@ namespace ALE2
 
         private string buildTransitionsString(List<Transition> transitions)
         {
-            string transitionsDot = "";
+            string transitionsDot = "\" \"" + " -> " +  "\""+ transitions[0].initialState.data + "\"";
             foreach (Transition transition in transitions)
             {
                 transitionsDot += "\"" + transition.initialState.data + "\"" 

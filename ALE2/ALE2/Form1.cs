@@ -76,18 +76,20 @@ namespace ALE2
 
         private void btnParseRE_Click(object sender, EventArgs e)
         {
-            RegularExpression re0 = new RegularExpression(new Letter('*'));
-            RegularExpression re1 = new RegularExpression(new Letter('a'));
-            RegularExpression re2 = new RegularExpression(new Letter('b'));
-            RegularExpression re3 = new RegularExpression(new Letter('.'));
-            re3.left = re1;
-            re3.right = re2;
-            re0.left = re3;
+            string formula = tbRegularExpression.Text;
             RegularExpressionController regularExpressionController = new RegularExpressionController();
 
-            List<Transition> transitions = regularExpressionController.getNdfaFromRegularExpression(re0);
+            RegularExpression root = regularExpressionController.GetNdfaFromRegularExpression(ref formula);
+
+            List<Transition> transitions = root.transitions;//regularExpressionController.GetNdfaFromRegularExpression(root);
             List<State> states = regularExpressionController.ExtractStatesFromTransitions(transitions);
             List<Letter> alphabet = regularExpressionController.ExtractAlphabetFromTransitions(transitions);
+
+            int exchangeTransitionIndex = transitions.FindIndex(_ => _.initialState == root.initial);
+            Transition frontTransition = transitions.Find(_ => _.initialState == root.initial);
+
+            transitions[exchangeTransitionIndex] = transitions[0];
+            transitions[0] = frontTransition;
 
             this._imageBuilder.BuildGraphVizImage(pbAutomata, states, transitions);
 

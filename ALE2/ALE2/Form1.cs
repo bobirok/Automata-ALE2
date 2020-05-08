@@ -91,6 +91,8 @@ namespace ALE2
             transitions[exchangeTransitionIndex] = transitions[0];
             transitions[0] = frontTransition;
 
+            string regularExpressionAsString = regularExpressionController.GetNDfaFromRegularExpressionAsString(transitions);
+            MessageBox.Show(regularExpressionAsString);
             this._imageBuilder.BuildGraphVizImage(pbAutomata, states, transitions);
 
             pbAutomata.SizeMode = PictureBoxSizeMode.StretchImage;

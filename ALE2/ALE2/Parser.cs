@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ALE2
 {
@@ -24,8 +25,7 @@ namespace ALE2
             {
                 if (!isEscapableChar(alphabetString[i]))
                 {
-                    Letter letter = new Letter(alphabetString[i]);
-                    this._alphabet.Add(letter);
+                    this._alphabet.Add(new Letter(alphabetString[i]));
                 }
             }
         }
@@ -40,14 +40,29 @@ namespace ALE2
                     uniqueStateString += statesString[i];
                     i++;
                 }
-                State state = new State(uniqueStateString);
-                this._states.Add(state);
+                this._states.Add(new State(uniqueStateString));
             }
         }
 
         public void parseFinalStates(string finalStatesString)
         {
-            this._states.Find(_ => _.data == finalStatesString).isFinalState = true;
+            try
+            {
+                string finalState;
+                for (int i = 0; i < finalStatesString.Length; i++)
+                {
+                    finalState = "";
+                    while (i < finalStatesString.Length && !isEscapableChar(finalStatesString[i]))
+                    {
+                        finalState += finalStatesString[i];
+                        i++;
+                    }
+                    this._states.Find(_ => _.data == finalState).isFinalState = true;
+                }
+            } catch(NullReferenceException)
+            {
+                MessageBox.Show("Please provide a valid state");
+            }
         }
 
         public void parseTransition(string transitionString)

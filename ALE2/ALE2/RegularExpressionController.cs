@@ -17,7 +17,6 @@ namespace ALE2
         {
             stateCounter = 0;
         }
-
         
         public RegularExpression GetNdfaFromRegularExpression(ref string formula)
         {
@@ -57,6 +56,15 @@ namespace ALE2
             }
         }
 
+        public string GetNDfaFromRegularExpressionAsString(List<Transition> transitions)
+        {
+            List<State> states = this.ExtractStatesFromTransitions(transitions);
+            List<State> finalStates = states.FindAll(_ => _.isFinalState);
+            List<Letter> alphabet = this.ExtractAlphabetFromTransitions(transitions);
+
+            return this.getAlphabetString(alphabet) + this.getStatesAsString(states) + this.getTransitionAsString(transitions);
+        }
+
         public List<State> ExtractStatesFromTransitions(List<Transition> transitions)
         {
             List<State> states = new List<State>();
@@ -76,7 +84,10 @@ namespace ALE2
 
             foreach (Transition transition in transitions)
             {
-                alphabet.Add(transition.connectingLetter);
+                if (transition.connectingLetter.data != '_')
+                {
+                    alphabet.Add(transition.connectingLetter);
+                }
             }
 
             return alphabet.GroupBy(_ => _.data).Select(_ => _.First()).ToList();
@@ -164,6 +175,51 @@ namespace ALE2
             starRegularExpression.transitions.AddRange(new List<Transition> { newTransition1, newTransition2, newTransition3, newTransition4 });
 
             return starRegularExpression;
+        }
+
+        private string getAlphabetString(List<Letter> alphabet)
+        {
+            string alphabetString = "alphabet: ";
+
+            for (int i = 0; i < alphabet.Count; i++)
+            {
+                alphabetString += alphabet[i].data;
+                alphabetString += i != alphabetString.Length - 1 ? "," : " ";
+            }
+
+            alphabetString += "\n";
+
+            return alphabetString;
+        }
+
+        private string getStatesAsString(List<State> states)
+        {
+            string statesString = "alphabet: ";
+
+            for (int i = 0; i < states.Count; i++)
+            {
+                statesString += states[i].data;
+                statesString += i != statesString.Length - 1 ? "," : " ";
+            }
+
+            statesString += "\n";
+
+            return statesString;
+        }
+
+        private string getTransitionAsString(List<Transition> transitions)
+        {
+            string transitionsString = "transitions: \n";
+
+            for (int i = 0; i < transitions.Count; i++)
+            {
+                transitionsString += transitions[i].initialState.data + "," + transitions[i].connectingLetter.data + 
+                                    " --> " + transitions[i].destinationState.data + "\n";
+            }
+
+            transitionsString += "end.";
+
+            return transitionsString;
         }
 
         private bool isLetterChar(char charToCheck)

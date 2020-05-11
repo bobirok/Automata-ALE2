@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Windows.Forms;
 
 namespace ALE2
 {
+    [ExcludeFromCodeCoverage]
     public class ImageBuilder
     {
         public void BuildGraphVizImage(PictureBox pbAutomata, List<State> states, List<Transition> transitions)

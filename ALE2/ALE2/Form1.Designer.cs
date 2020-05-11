@@ -49,27 +49,30 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 28);
+            this.richTextBox1.Location = new System.Drawing.Point(24, 54);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(215, 386);
+            this.richTextBox1.Size = new System.Drawing.Size(426, 739);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // lblFunction
             // 
             this.lblFunction.AutoSize = true;
-            this.lblFunction.Location = new System.Drawing.Point(12, 9);
+            this.lblFunction.Location = new System.Drawing.Point(24, 17);
+            this.lblFunction.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFunction.Name = "lblFunction";
-            this.lblFunction.Size = new System.Drawing.Size(51, 13);
+            this.lblFunction.Size = new System.Drawing.Size(101, 25);
             this.lblFunction.TabIndex = 1;
             this.lblFunction.Text = "Function:";
             this.lblFunction.Click += new System.EventHandler(this.label1_Click);
             // 
             // pbAutomata
             // 
-            this.pbAutomata.Location = new System.Drawing.Point(266, 51);
+            this.pbAutomata.Location = new System.Drawing.Point(532, 98);
+            this.pbAutomata.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.pbAutomata.Name = "pbAutomata";
-            this.pbAutomata.Size = new System.Drawing.Size(432, 384);
+            this.pbAutomata.Size = new System.Drawing.Size(864, 738);
             this.pbAutomata.TabIndex = 2;
             this.pbAutomata.TabStop = false;
             // 
@@ -79,9 +82,11 @@
             this.gbDfa.Controls.Add(this.label2);
             this.gbDfa.Controls.Add(this.btnExpected);
             this.gbDfa.Controls.Add(this.label1);
-            this.gbDfa.Location = new System.Drawing.Point(15, 428);
+            this.gbDfa.Location = new System.Drawing.Point(30, 823);
+            this.gbDfa.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.gbDfa.Name = "gbDfa";
-            this.gbDfa.Size = new System.Drawing.Size(123, 93);
+            this.gbDfa.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbDfa.Size = new System.Drawing.Size(246, 179);
             this.gbDfa.TabIndex = 3;
             this.gbDfa.TabStop = false;
             this.gbDfa.Text = "DFA";
@@ -89,44 +94,49 @@
             // btnActual
             // 
             this.btnActual.Enabled = false;
-            this.btnActual.Location = new System.Drawing.Point(70, 49);
+            this.btnActual.Location = new System.Drawing.Point(140, 94);
+            this.btnActual.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnActual.Name = "btnActual";
-            this.btnActual.Size = new System.Drawing.Size(47, 23);
+            this.btnActual.Size = new System.Drawing.Size(94, 44);
             this.btnActual.TabIndex = 5;
             this.btnActual.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 54);
+            this.label2.Location = new System.Drawing.Point(20, 104);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 13);
+            this.label2.Size = new System.Drawing.Size(78, 25);
             this.label2.TabIndex = 1;
             this.label2.Text = "Actual:";
             // 
             // btnExpected
             // 
             this.btnExpected.Enabled = false;
-            this.btnExpected.Location = new System.Drawing.Point(70, 15);
+            this.btnExpected.Location = new System.Drawing.Point(140, 29);
+            this.btnExpected.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExpected.Name = "btnExpected";
-            this.btnExpected.Size = new System.Drawing.Size(47, 23);
+            this.btnExpected.Size = new System.Drawing.Size(94, 44);
             this.btnExpected.TabIndex = 4;
             this.btnExpected.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Location = new System.Drawing.Point(14, 38);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.Size = new System.Drawing.Size(102, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Expected";
             // 
             // btnParse
             // 
-            this.btnParse.Location = new System.Drawing.Point(152, 420);
+            this.btnParse.Location = new System.Drawing.Point(304, 808);
+            this.btnParse.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnParse.Name = "btnParse";
-            this.btnParse.Size = new System.Drawing.Size(75, 23);
+            this.btnParse.Size = new System.Drawing.Size(150, 44);
             this.btnParse.TabIndex = 4;
             this.btnParse.Text = "Parse";
             this.btnParse.UseVisualStyleBackColor = true;
@@ -134,18 +144,20 @@
             // 
             // rtbWords
             // 
-            this.rtbWords.Location = new System.Drawing.Point(745, 28);
+            this.rtbWords.Location = new System.Drawing.Point(1490, 54);
+            this.rtbWords.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.rtbWords.Name = "rtbWords";
-            this.rtbWords.Size = new System.Drawing.Size(215, 386);
+            this.rtbWords.Size = new System.Drawing.Size(426, 739);
             this.rtbWords.TabIndex = 5;
             this.rtbWords.Text = "";
             // 
             // lblWords
             // 
             this.lblWords.AutoSize = true;
-            this.lblWords.Location = new System.Drawing.Point(742, 9);
+            this.lblWords.Location = new System.Drawing.Point(1484, 17);
+            this.lblWords.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblWords.Name = "lblWords";
-            this.lblWords.Size = new System.Drawing.Size(41, 13);
+            this.lblWords.Size = new System.Drawing.Size(80, 25);
             this.lblWords.TabIndex = 6;
             this.lblWords.Text = "Words:";
             // 
@@ -153,21 +165,21 @@
             // 
             this.groupBox1.Controls.Add(this.btnParseRE);
             this.groupBox1.Controls.Add(this.tbRegularExpression);
-            this.groupBox1.Location = new System.Drawing.Point(346, 6);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Location = new System.Drawing.Point(692, 12);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Size = new System.Drawing.Size(276, 40);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(552, 77);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Regular expression";
             // 
             // btnParseRE
             // 
-            this.btnParseRE.Location = new System.Drawing.Point(181, 14);
-            this.btnParseRE.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnParseRE.Location = new System.Drawing.Point(362, 27);
+            this.btnParseRE.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnParseRE.Name = "btnParseRE";
-            this.btnParseRE.Size = new System.Drawing.Size(73, 20);
+            this.btnParseRE.Size = new System.Drawing.Size(146, 38);
             this.btnParseRE.TabIndex = 1;
             this.btnParseRE.Text = "Parse";
             this.btnParseRE.UseVisualStyleBackColor = true;
@@ -175,17 +187,17 @@
             // 
             // tbRegularExpression
             // 
-            this.tbRegularExpression.Location = new System.Drawing.Point(3, 16);
-            this.tbRegularExpression.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbRegularExpression.Location = new System.Drawing.Point(6, 31);
+            this.tbRegularExpression.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbRegularExpression.Name = "tbRegularExpression";
-            this.tbRegularExpression.Size = new System.Drawing.Size(165, 20);
+            this.tbRegularExpression.Size = new System.Drawing.Size(326, 31);
             this.tbRegularExpression.TabIndex = 0;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(976, 508);
+            this.ClientSize = new System.Drawing.Size(1952, 977);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblWords);
             this.Controls.Add(this.rtbWords);
@@ -194,8 +206,10 @@
             this.Controls.Add(this.pbAutomata);
             this.Controls.Add(this.lblFunction);
             this.Controls.Add(this.richTextBox1);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Form1";
             this.Text = "Automata";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbAutomata)).EndInit();
             this.gbDfa.ResumeLayout(false);
             this.gbDfa.PerformLayout();

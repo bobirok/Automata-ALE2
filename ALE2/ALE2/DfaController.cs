@@ -6,7 +6,7 @@ namespace ALE2
 {
     public class DfaController
     {
-        public bool isDfa(List<State> states, List<Letter> alphabet)
+        public bool IsDfa(List<State> states, List<Letter> alphabet)
         {
             if (states.Exists(_ => _.outgoingLetters.Exists(x => x.data == '_'))) { return false; }
 

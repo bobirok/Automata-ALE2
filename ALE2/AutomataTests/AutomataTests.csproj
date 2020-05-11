@@ -66,6 +66,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegularExpressionTest.cs" />
     <Compile Include="StateTest.cs" />
+    <Compile Include="DfaControllerTest.cs" />
+    <Compile Include="ParserControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -51,7 +51,7 @@ namespace ALE2
                 } else if(lines[i].Contains("words"))
                 {
                     i++;
-                        this.handleLineWord(lines, i);
+                    this.handleLineWord(lines, i);
                 }
             }
         }

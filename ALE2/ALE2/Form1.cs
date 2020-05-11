@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 
 namespace ALE2
 {
+    [ExcludeFromCodeCoverage]
     public partial class Form1 : Form
     {
         private ParserController _parserController;
@@ -41,7 +43,7 @@ namespace ALE2
 
             this._imageBuilder.BuildGraphVizImage(pbAutomata, states, transitions);
 
-            bool actualDfa = this._dfaController.isDfa(states, alphabet);
+            bool actualDfa = this._dfaController.IsDfa(states, alphabet);
             this.defineDfaForUser(actualDfa, btnActual);
 
             bool expectedDfa = this._parserController.expectedDfa;
@@ -96,6 +98,11 @@ namespace ALE2
             this._imageBuilder.BuildGraphVizImage(pbAutomata, states, transitions);
 
             pbAutomata.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

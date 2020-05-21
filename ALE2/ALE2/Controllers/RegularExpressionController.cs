@@ -62,7 +62,8 @@ namespace ALE2
             List<State> finalStates = states.FindAll(_ => _.isFinalState);
             List<Letter> alphabet = this.ExtractAlphabetFromTransitions(transitions);
 
-            return this.getAlphabetString(alphabet) + this.getStatesAsString(states) + this.getTransitionAsString(transitions);
+            return this.getAlphabetString(alphabet) + this.getStatesAsString(states) + this.getFinalStatesAsString(finalStates)
+                    + this.getTransitionAsString(transitions);
         }
 
         public virtual List<State> ExtractStatesFromTransitions(List<Transition> transitions)
@@ -198,12 +199,27 @@ namespace ALE2
             for (int i = 0; i < states.Count; i++)
             {
                 statesString += states[i].data;
-                statesString += i != statesString.Length - 1 ? "," : " ";
+                statesString += i != states.Count - 1 ? "," : "";
             }
 
             statesString += "\n";
 
             return statesString;
+        }
+
+        private string getFinalStatesAsString(List<State> finalStates)
+        {
+            string finalStatesString = "final: ";
+
+            for (int i = 0; i < finalStates.Count; i++)
+            {
+                finalStatesString += finalStates[i].data;
+                finalStatesString += i != finalStates.Count - 1 ? "," : "";
+            }
+
+            finalStatesString += "\n";
+
+            return finalStatesString;
         }
 
         private string getTransitionAsString(List<Transition> transitions)

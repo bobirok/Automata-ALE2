@@ -72,3 +72,63 @@ bb, y
 bab, y
 bbb, y
 end.
+
+
+alphabet: ab
+states: S,B,C
+final: B
+transitions:
+S,a --> B
+B,b --> C
+C,a --> C
+end;
+
+words:
+bb, y
+bab, y
+bbb, y
+end.
+
+alphabet: abc
+states: S,B
+final: B
+transitions:
+S,a --> B
+S,b --> B
+B,a --> S
+end;
+
+// TEACHERS'S CASE
+
+alphabet: ab
+states: S,B,C
+final: C
+transitions:
+S,a --> B
+B,a --> C
+C,a --> C
+end;
+
+// Test - it does not work
+alphabet: ab
+states: S,B,C
+final: C
+transitions:
+S,a --> B
+B,a --> C
+C,a --> C
+end;
+
+// Test - it does not work
+alphabet: ab
+states: S,B,C
+final: C
+transitions:
+S,a --> B
+S,b --> B
+B,a --> C
+B,b --> C
+end.
+
+dfa: n
+finite: y

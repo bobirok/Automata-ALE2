@@ -19,23 +19,23 @@ namespace ALE2
             this._transitions = transitions;
         }
 
-        public void parseAlphabet(string alphabetString)
+        public void ParseAlphabet(string alphabetString)
         {
             for (int i = 0; i < alphabetString.Length; i++)
             {
-                if (!isEscapableChar(alphabetString[i]))
+                if (!IsEscapableChar(alphabetString[i]))
                 {
                     this._alphabet.Add(new Letter(alphabetString[i]));
                 }
             }
         }
 
-        public void parseStates(string statesString)
+        public void ParseStates(string statesString)
         {
             for (int i = 0; i < statesString.Length; i++)
             {
                 string uniqueStateString = "";
-                while (i < statesString.Length && !isEscapableChar(statesString[i]))
+                while (i < statesString.Length && !IsEscapableChar(statesString[i]))
                 {
                     uniqueStateString += statesString[i];
                     i++;
@@ -44,7 +44,7 @@ namespace ALE2
             }
         }
 
-        public void parseFinalStates(string finalStatesString)
+        public void ParseFinalStates(string finalStatesString)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace ALE2
                 for (int i = 0; i < finalStatesString.Length; i++)
                 {
                     finalState = "";
-                    while (i < finalStatesString.Length && !isEscapableChar(finalStatesString[i]))
+                    while (i < finalStatesString.Length && !IsEscapableChar(finalStatesString[i]))
                     {
                         finalState += finalStatesString[i];
                         i++;
@@ -65,7 +65,7 @@ namespace ALE2
             }
         }
 
-        public void parseTransition(string transitionString)
+        public void ParseTransition(string transitionString)
         {
             string initalStateString = "", finalStateString = "";
             char letter = ' ';
@@ -73,10 +73,10 @@ namespace ALE2
 
             for (int k = 0; k < transitionString.Length; k++)
             {
-                if(isEscapableChar(transitionString[k])) continue; 
+                if(IsEscapableChar(transitionString[k])) continue; 
                 if(isStateChar(transitionString[k]) && transition.initialState == null && transition.destinationState == null)
                 {
-                    while(k < transitionString.Length && !isEscapableChar(transitionString[k]))
+                    while(k < transitionString.Length && !IsEscapableChar(transitionString[k]))
                     {
                         initalStateString += transitionString[k];
                         k++;
@@ -84,7 +84,7 @@ namespace ALE2
                     transition.initialState = this._states.Find(_ => _.data == initalStateString);
                 } else if(isStateChar(transitionString[k]) && transition.initialState != null && transition.destinationState == null)
                 {
-                    while (k < transitionString.Length && !isEscapableChar(transitionString[k]))
+                    while (k < transitionString.Length && !IsEscapableChar(transitionString[k]))
                     {
                         finalStateString += transitionString[k];
                         k++;
@@ -107,7 +107,7 @@ namespace ALE2
             this._transitions.Add(transition);
         }
 
-        public bool wordExists(string word, State currentState)
+        public bool WordExists(string word, State currentState)
         {
             if (word.Length == 0) 
             {
@@ -145,16 +145,38 @@ namespace ALE2
                 else
                 {
                     currentState = possibleTransitions[0].destinationState;
-                    return wordExists(word.Substring(1), currentState);
+                    return WordExists(word.Substring(1), currentState);
                 }
             }
+        }
+
+        public bool ParseFinite(string finiteString)
+        {
+            string expectedFiniteAsString = "";
+
+            for (int i = 0; i < finiteString.Length; i++)
+            {
+                if(!IsEscapableChar(finiteString[i])) { expectedFiniteAsString += finiteString[i]; }
+            }
+
+            return expectedFiniteAsString.Contains("y") ? true : false;
+        }
+
+        public bool IsEscapableChar(char charToCheck)
+        {
+            if (charToCheck == ' ' || charToCheck == ',' || charToCheck == '-' || charToCheck == '>' || charToCheck == ':')
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private bool handleMultipleWordTransitions(string word, List<Transition> transitions)
         {
             foreach (Transition transition in transitions)
             {
-                if (wordExists(word.Substring(1), transition.destinationState))
+                if (WordExists(word.Substring(1), transition.destinationState))
                 {
                     return true;
                 }
@@ -193,16 +215,6 @@ namespace ALE2
         private bool isEpsilon(char charToCheck)
         {
             if(charToCheck == '_')
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool isEscapableChar(char charToCheck)
-        {
-            if (charToCheck == ' ' || charToCheck == ',' || charToCheck == '-' || charToCheck == '>')
             {
                 return true;
             }

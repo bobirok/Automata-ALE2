@@ -17,6 +17,7 @@ namespace ALE2
         private ParserController _parserController;
         private ImageBuilder _imageBuilder = new ImageBuilder();
         private DfaController _dfaController = new DfaController();
+        private FiniteController _finiteController;
 
         public Form1()
         {
@@ -44,19 +45,21 @@ namespace ALE2
             this._imageBuilder.BuildGraphVizImage(pbAutomata, states, transitions);
 
             bool actualDfa = this._dfaController.IsDfa(states, alphabet);
-            this.defineDfaForUser(actualDfa, btnActual);
+            this.defineButtonsForUser(actualDfa, btnActual);
 
             bool expectedDfa = this._parserController.expectedDfa;
-            this.defineDfaForUser(expectedDfa, btnExpected);
+            this.defineButtonsForUser(expectedDfa, btnExpected);
+
+            this.handleDefiningFinite(transitions, states, this._parserController.expectedFinite);
 
             this.checkForWordsExistance(words);
 
             pbAutomata.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
-        private void defineDfaForUser(bool dfa, Button button)
+        private void defineButtonsForUser(bool check, Button button)
         {
-            if(dfa)
+            if(check)
             {
                 button.BackColor = Color.Green;
             } else
@@ -67,12 +70,34 @@ namespace ALE2
 
         private void checkForWordsExistance(List<Word> words)
         {
-            rtbWords.Text = "";
+            dataGridView1.Rows.Clear();
             foreach (Word word in words)
             {
-                rtbWords.Text += word.word;
-                rtbWords.Text += word.existsInAutomata ? " exists" : " does not exist";
-                rtbWords.Text += "\n";
+                dataGridView1.Rows.Add(word.word, word.expectedWordExistance, word.existsInAutomata);
+            }
+        }
+
+        private void handleDefiningFinite(List<Transition> transitions, List<State> states, bool expectedFinite)
+        {
+            List<Trace> traces = new List<Trace>();
+            List<Transition> transitionss = new List<Transition>();
+            this._finiteController = new FiniteController(traces, transitions);
+            this._finiteController.InstantiateTraces(states[0], states[0], transitionss);
+            bool isFinite = this._finiteController.AutomataIsFinite();
+            this.defineButtonsForUser(expectedFinite, btnFiniteExpected);
+            this.defineButtonsForUser(isFinite, btnFiniteActual);
+            this.loadFiniteWords();
+        }
+
+        private void loadFiniteWords()
+        {
+            List<Word> finiteWords = this._finiteController.ExtractAllWordsFromAutomata();
+
+            dataGridViewFiniteWords.Rows.Clear();
+
+            foreach (Word word in finiteWords)
+            {
+                dataGridViewFiniteWords.Rows.Add(word.word, word.expectedWordExistance, word.existsInAutomata);
             }
         }
 
@@ -83,7 +108,7 @@ namespace ALE2
 
             RegularExpression root = regularExpressionController.GetNdfaFromRegularExpression(ref formula);
 
-            List<Transition> transitions = root.transitions;//regularExpressionController.GetNdfaFromRegularExpression(root);
+            List<Transition> transitions = root.transitions;
             List<State> states = regularExpressionController.ExtractStatesFromTransitions(transitions);
             List<Letter> alphabet = regularExpressionController.ExtractAlphabetFromTransitions(transitions);
 
@@ -94,7 +119,13 @@ namespace ALE2
             transitions[0] = frontTransition;
 
             string regularExpressionAsString = regularExpressionController.GetNDfaFromRegularExpressionAsString(transitions);
-            MessageBox.Show(regularExpressionAsString);
+
+            richTextBox1.Clear();
+
+            richTextBox1.Text = regularExpressionAsString;
+
+            System.IO.File.WriteAllText("./RegularExpression.txt", regularExpressionAsString);
+
             this._imageBuilder.BuildGraphVizImage(pbAutomata, states, transitions);
 
             pbAutomata.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -103,6 +134,11 @@ namespace ALE2
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void pbAutomata_Click(object sender, EventArgs e)
+        {
+            //System.Diagnostics.Process.Start("./abc.png");
         }
     }
 }

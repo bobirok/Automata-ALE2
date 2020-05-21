@@ -46,24 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RegularExpression.cs" />
-    <Compile Include="RegularExpressionController.cs" />
-    <Compile Include="Word.cs" />
-    <Compile Include="DfaController.cs" />
-    <Compile Include="ImageBuilder.cs" />
+    <Compile Include="Controllers\FiniteController.cs" />
+    <Compile Include="Models\RegularExpression.cs" />
+    <Compile Include="Controllers\RegularExpressionController.cs" />
+    <Compile Include="Models\Trace.cs" />
+    <Compile Include="Models\Word.cs" />
+    <Compile Include="Controllers\DfaController.cs" />
+    <Compile Include="Infrastructure\ImageBuilder.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Letter.cs" />
-    <Compile Include="Parser.cs" />
-    <Compile Include="ParserController.cs" />
+    <Compile Include="Models\Letter.cs" />
+    <Compile Include="Controllers\Parser.cs" />
+    <Compile Include="Controllers\ParserController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="State.cs" />
-    <Compile Include="Transition.cs" />
+    <Compile Include="Models\State.cs" />
+    <Compile Include="Models\Transition.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

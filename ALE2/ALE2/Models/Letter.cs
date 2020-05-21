@@ -14,6 +14,18 @@ namespace ALE2
         {
             this.data = data;
         }
+
+        public Letter CopyLetter()
+        {
+            return new Letter(this.data);
+        }
+
+        public override bool Equals(Object obj)
+        {
+            Letter letter = obj as Letter;
+
+            return this.data == letter.data;
+        } 
         
     }
 }

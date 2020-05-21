@@ -8,12 +8,14 @@ namespace ALE2
 {
     public class ParserController
     {
-        private Parser _parser;
+        public Parser _parser { get; }
         private List<Word> _words;
         private List<State> _states;
         public bool expectedDfa { get; set; }
+        public bool expectedFinite { get; set; }
 
-        public ParserController(List<Letter> alphabet, List<State> states, List<Transition> transitions, List<Word> words)
+        public ParserController(List<Letter> alphabet, List<State> states, List<Transition> transitions, 
+                List<Word> words)
         {
             this._parser = new Parser(alphabet, states, transitions);
             this._words = words;
@@ -27,21 +29,21 @@ namespace ALE2
                 if (lines[i].Contains("alphabet: "))
                 {
                     string alphabet = lines[i].Substring(10);
-                    this._parser.parseAlphabet(alphabet);
+                    this._parser.ParseAlphabet(alphabet);
                 } else if (lines[i].Contains("states"))
                 {
                     string states = lines[i].Substring(8);
-                    this._parser.parseStates(states);
+                    this._parser.ParseStates(states);
                 } else if (lines[i].Contains("final"))
                 {
                     string final = lines[i].Substring(7);
-                    this._parser.parseFinalStates(final);
+                    this._parser.ParseFinalStates(final);
                 } else if (lines[i].Contains("transitions"))
                 {
                     i++;
                     while (!lines[i].Contains("end"))
                     {
-                        this._parser.parseTransition(lines[i]);
+                        this._parser.ParseTransition(lines[i]);
                         i++;
                     }
                 } else if(lines[i].Contains("dfa"))
@@ -52,6 +54,10 @@ namespace ALE2
                 {
                     i++;
                     this.handleLineWord(lines, i);
+                } else if(lines[i].Contains("finite"))
+                {
+                    string finite = lines[i].Substring(6);
+                    this.expectedFinite = this._parser.ParseFinite(finite);
                 }
             }
         }
@@ -62,9 +68,9 @@ namespace ALE2
             {
                 int endIndex = lines[i].IndexOf(',');
                 string word = lines[i].Substring(0, endIndex);
-                bool wordExists = this._parser.wordExists(word, this._states[0]);
+                bool wordExists = this._parser.WordExists(word, this._states[0]);
 
-                while (_parser.isEscapableChar(lines[i][endIndex]))
+                while (_parser.IsEscapableChar(lines[i][endIndex]))
                 {
                     endIndex++;
                 }

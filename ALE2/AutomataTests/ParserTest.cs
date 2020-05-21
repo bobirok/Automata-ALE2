@@ -20,7 +20,7 @@ namespace AutomataTests
             string unparsedAlphabet = "abc";
 
             // act
-            parser.parseAlphabet(unparsedAlphabet);
+            parser.ParseAlphabet(unparsedAlphabet);
 
             // assert
             Assert.AreEqual(alphabet.Count, 3);
@@ -37,7 +37,7 @@ namespace AutomataTests
             string unparsedStates = "S,A,B,C";
 
             // act
-            parser.parseStates(unparsedStates);
+            parser.ParseStates(unparsedStates);
 
             // assert
             Assert.AreEqual(states.Count, 4);
@@ -54,7 +54,7 @@ namespace AutomataTests
             string unparsedFinalStates = "B";
 
             // act
-            parser.parseFinalStates(unparsedFinalStates);
+            parser.ParseFinalStates(unparsedFinalStates);
             State finalState = states.Find(_ => _.data == unparsedFinalStates);
 
             // assert
@@ -72,7 +72,7 @@ namespace AutomataTests
             string unparsedTransition = "S,a --> B ";
 
             // act
-            parser.parseTransition(unparsedTransition);
+            parser.ParseTransition(unparsedTransition);
             Transition transition = transitions[0];
             Letter connectingLetter = alphabet.Find(_ => _.data == 'a');
 
@@ -97,7 +97,7 @@ namespace AutomataTests
             // act
             stateTwo.isFinalState = true;
             stateOne.outgoingLetters.Add(letter);
-            bool wordExistsInAutomata = parser.wordExists(word, stateOne);
+            bool wordExistsInAutomata = parser.WordExists(word, stateOne);
 
             // assert
             Assert.IsTrue(wordExistsInAutomata);
@@ -119,7 +119,7 @@ namespace AutomataTests
             // act
             stateTwo.isFinalState = true;
             stateOne.outgoingLetters.Add(letter);
-            bool wordExistsInAutomata = parser.wordExists(word, stateOne);
+            bool wordExistsInAutomata = parser.WordExists(word, stateOne);
 
             // assert
             Assert.IsFalse(wordExistsInAutomata);
@@ -142,7 +142,7 @@ namespace AutomataTests
             // act
             stateTwo.isFinalState = true;
             stateOne.outgoingLetters.Add(letter);
-            bool wordExistsInAutomata = parser.wordExists(word, stateOne);
+            bool wordExistsInAutomata = parser.WordExists(word, stateOne);
 
             // assert
             Assert.IsTrue(wordExistsInAutomata);
@@ -165,7 +165,7 @@ namespace AutomataTests
             // act
             stateTwo.isFinalState = true;
             stateOne.outgoingLetters.Add(letter);
-            bool wordExistsInAutomata = parser.wordExists(word, stateOne);
+            bool wordExistsInAutomata = parser.WordExists(word, stateOne);
 
             // assert
             Assert.IsFalse(wordExistsInAutomata);

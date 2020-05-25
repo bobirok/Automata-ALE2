@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,10 @@ namespace ALE2
         private ImageBuilder _imageBuilder = new ImageBuilder();
         private DfaController _dfaController = new DfaController();
         private FiniteController _finiteController;
+        private List<State> states;
+        private List<Letter> alphabet;
+        private List<Transition> transitions;
+        private List<Word> words;
 
         public Form1()
         {
@@ -33,10 +38,10 @@ namespace ALE2
         {
             string[] lines = richTextBox1.Text.Split('\n');
 
-            List<Letter> alphabet = new List<Letter>();
-            List<State> states = new List<State>();
-            List<Transition> transitions = new List<Transition>();
-            List<Word> words = new List<Word>();
+            alphabet = new List<Letter>();
+            states = new List<State>();
+            transitions = new List<Transition>();
+            words = new List<Word>();
 
             this._parserController = new ParserController(alphabet, states, transitions, words);
 
@@ -139,6 +144,42 @@ namespace ALE2
         private void pbAutomata_Click(object sender, EventArgs e)
         {
             //System.Diagnostics.Process.Start("./abc.png");
+        }
+
+        private void btnCheckWord_Click(object sender, EventArgs e)
+        {
+            string wordAsString = tbCheckWord.Text;
+            bool wordExists = this._parserController._parser.WordExists(wordAsString, this.states[0]);
+            Word word = new Word(wordAsString, wordExists, true);
+            dataGridView1.Rows.Add(word.word, word.expectedWordExistance, word.existsInAutomata);
+        }
+
+        private void btnLoadFromFile_Click(object sender, EventArgs e)
+        {
+            string automata = "";
+            Stream myStream = null;
+            OpenFileDialog theDialog = new OpenFileDialog();
+            theDialog.Title = "Choose automata";
+            theDialog.Filter = "TXT files|*.txt";
+            if (theDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    if ((myStream = theDialog.OpenFile()) != null)
+                    {
+                        using (myStream)
+                        {
+                            automata = File.ReadAllText(theDialog.FileName);
+                            richTextBox1.Text = automata;
+                            btnParse_Click(sender, e);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
         }
     }
 }

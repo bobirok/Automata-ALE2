@@ -1,7 +1,15 @@
-alphabet: ab
-states: S0,S1,S3
-final: S3
+alphabet: ba
+states: S6,S4,S2,S3,S0,S1,S5,S7
+final: S7
 transitions: 
+S6,_ --> S4
+S2,b --> S3
+S4,_ --> S0
+S4,_ --> S2
+S1,_ --> S5
+S3,_ --> S5
 S0,a --> S1
-S1,b --> S3
+S6,_ --> S7
+S5,_ --> S4
+S5,_ --> S7
 end.

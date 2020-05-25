@@ -1,0 +1,15 @@
+
+alphabet: ab
+states: S,B,C
+final: B
+transitions:
+S,a --> B
+B,b --> C
+C,a --> C
+end;
+
+words:
+bb, y
+bab, y
+bbb, y
+end.

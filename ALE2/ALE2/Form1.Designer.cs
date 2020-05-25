@@ -54,6 +54,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnFiniteExpected = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.tbCheckWord = new System.Windows.Forms.TextBox();
+            this.btnCheckWord = new System.Windows.Forms.Button();
+            this.btnLoadFromFile = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbAutomata)).BeginInit();
             this.gbDfa.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -140,7 +143,7 @@
             // 
             // btnParse
             // 
-            this.btnParse.Location = new System.Drawing.Point(15, 451);
+            this.btnParse.Location = new System.Drawing.Point(15, 440);
             this.btnParse.Name = "btnParse";
             this.btnParse.Size = new System.Drawing.Size(214, 49);
             this.btnParse.TabIndex = 4;
@@ -151,7 +154,7 @@
             // lblWords
             // 
             this.lblWords.AutoSize = true;
-            this.lblWords.Location = new System.Drawing.Point(742, 9);
+            this.lblWords.Location = new System.Drawing.Point(701, 20);
             this.lblWords.Name = "lblWords";
             this.lblWords.Size = new System.Drawing.Size(41, 13);
             this.lblWords.TabIndex = 6;
@@ -162,9 +165,9 @@
             this.groupBox1.Controls.Add(this.btnParseRE);
             this.groupBox1.Controls.Add(this.tbRegularExpression);
             this.groupBox1.Location = new System.Drawing.Point(346, 6);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(276, 40);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
@@ -173,7 +176,7 @@
             // btnParseRE
             // 
             this.btnParseRE.Location = new System.Drawing.Point(181, 14);
-            this.btnParseRE.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnParseRE.Margin = new System.Windows.Forms.Padding(2);
             this.btnParseRE.Name = "btnParseRE";
             this.btnParseRE.Size = new System.Drawing.Size(73, 20);
             this.btnParseRE.TabIndex = 1;
@@ -184,7 +187,7 @@
             // tbRegularExpression
             // 
             this.tbRegularExpression.Location = new System.Drawing.Point(3, 16);
-            this.tbRegularExpression.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbRegularExpression.Margin = new System.Windows.Forms.Padding(2);
             this.tbRegularExpression.Name = "tbRegularExpression";
             this.tbRegularExpression.Size = new System.Drawing.Size(165, 20);
             this.tbRegularExpression.TabIndex = 0;
@@ -197,7 +200,7 @@
             this.expected,
             this.actual});
             this.dataGridView1.Location = new System.Drawing.Point(704, 78);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 20;
@@ -233,7 +236,7 @@
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3});
             this.dataGridViewFiniteWords.Location = new System.Drawing.Point(703, 297);
-            this.dataGridViewFiniteWords.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewFiniteWords.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewFiniteWords.Name = "dataGridViewFiniteWords";
             this.dataGridViewFiniteWords.RowHeadersWidth = 82;
             this.dataGridViewFiniteWords.RowTemplate.Height = 20;
@@ -310,11 +313,41 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Expected";
             // 
+            // tbCheckWord
+            // 
+            this.tbCheckWord.Location = new System.Drawing.Point(704, 51);
+            this.tbCheckWord.Name = "tbCheckWord";
+            this.tbCheckWord.Size = new System.Drawing.Size(134, 20);
+            this.tbCheckWord.TabIndex = 11;
+            // 
+            // btnCheckWord
+            // 
+            this.btnCheckWord.Location = new System.Drawing.Point(844, 49);
+            this.btnCheckWord.Name = "btnCheckWord";
+            this.btnCheckWord.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckWord.TabIndex = 12;
+            this.btnCheckWord.Text = "Check";
+            this.btnCheckWord.UseVisualStyleBackColor = true;
+            this.btnCheckWord.Click += new System.EventHandler(this.btnCheckWord_Click);
+            // 
+            // btnLoadFromFile
+            // 
+            this.btnLoadFromFile.Location = new System.Drawing.Point(15, 492);
+            this.btnLoadFromFile.Name = "btnLoadFromFile";
+            this.btnLoadFromFile.Size = new System.Drawing.Size(214, 28);
+            this.btnLoadFromFile.TabIndex = 13;
+            this.btnLoadFromFile.Text = "Load from file";
+            this.btnLoadFromFile.UseVisualStyleBackColor = true;
+            this.btnLoadFromFile.Click += new System.EventHandler(this.btnLoadFromFile_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1078, 518);
+            this.ClientSize = new System.Drawing.Size(1078, 522);
+            this.Controls.Add(this.btnLoadFromFile);
+            this.Controls.Add(this.btnCheckWord);
+            this.Controls.Add(this.tbCheckWord);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.dataGridViewFiniteWords);
             this.Controls.Add(this.dataGridView1);
@@ -370,6 +403,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnFiniteExpected;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tbCheckWord;
+        private System.Windows.Forms.Button btnCheckWord;
+        private System.Windows.Forms.Button btnLoadFromFile;
     }
 }
 

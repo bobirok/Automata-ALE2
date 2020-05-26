@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ALE2.Controllers;
+using ALE2.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,10 +21,12 @@ namespace ALE2
         private ImageBuilder _imageBuilder = new ImageBuilder();
         private DfaController _dfaController = new DfaController();
         private FiniteController _finiteController;
+        private DfaConverterController _dfaConverterController;
         private List<State> states;
         private List<Letter> alphabet;
         private List<Transition> transitions;
         private List<Word> words;
+        private AutomataTable automataTable = new AutomataTable();
 
         public Form1()
         {
@@ -180,6 +184,13 @@ namespace ALE2
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
             }
+        }
+
+        private void btnConvertToFinite_Click(object sender, EventArgs e)
+        {
+            this._dfaConverterController = new DfaConverterController(this.automataTable);
+
+            this._dfaConverterController.convertNfaToTableFormat(this.transitions, this.states, this.alphabet);
         }
     }
 }

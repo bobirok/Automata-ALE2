@@ -204,7 +204,7 @@ namespace ALE2
 
         private bool isLetterChar(char charToCheck)
         {
-            if(charToCheck >= 'a' && charToCheck <= 'z')
+            if((charToCheck >= 'a' && charToCheck <= 'z') || (charToCheck >= '0' && charToCheck <= '9'))
             {
                 return true;
             }

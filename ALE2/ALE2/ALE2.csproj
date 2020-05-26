@@ -46,7 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DfaConverterController.cs" />
     <Compile Include="Controllers\FiniteController.cs" />
+    <Compile Include="Models\AutomataCell.cs" />
+    <Compile Include="Models\AutomataRow.cs" />
+    <Compile Include="Models\AutomataTable.cs" />
     <Compile Include="Models\RegularExpression.cs" />
     <Compile Include="Controllers\RegularExpressionController.cs" />
     <Compile Include="Models\Trace.cs" />

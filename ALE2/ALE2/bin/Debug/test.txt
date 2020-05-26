@@ -132,3 +132,17 @@ end.
 
 dfa: n
 finite: y
+
+alphabet: 01
+states: A,B,C
+final: C
+transitions:
+A,1 --> A
+A,0 --> C
+A,_ --> B
+A,0 --> B
+B,1 --> B
+B,_ --> C
+C,0 --> C
+C,1 --> C
+end.

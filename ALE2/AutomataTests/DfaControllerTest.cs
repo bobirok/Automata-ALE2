@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ALE2;
+using ALE2.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -18,7 +19,7 @@ namespace AutomataTests
             Mock<List<Letter>> alphabetMock = new Mock<List<Letter>>();
 
             List<State> states = new List<State>() { stateOneMock };
-            DfaController dfaController = new DfaController();
+            IDfaController dfaController = new DfaController();
 
             // act
             bool isDfa = dfaController.IsDfa(states, alphabetMock.Object);
@@ -38,7 +39,7 @@ namespace AutomataTests
             Mock<List<Letter>> alphabetMock = new Mock<List<Letter>>();
 
             List<State> states = new List<State>() { stateOneMock };
-            DfaController dfaController = new DfaController();
+            IDfaController dfaController = new DfaController();
 
             // act
             bool isDfa = dfaController.IsDfa(states, alphabetMock.Object);
@@ -58,7 +59,7 @@ namespace AutomataTests
             List<Letter> alphabetMock = new List<Letter>() { letterMockOne, letterMockTwo };
 
             List<State> states = new List<State>() { stateOneMock };
-            DfaController dfaController = new DfaController();
+            IDfaController dfaController = new DfaController();
 
             // act
             bool isDfa = dfaController.IsDfa(states, alphabetMock);
@@ -79,7 +80,7 @@ namespace AutomataTests
             List<Letter> alphabetMock = new List<Letter>() { letterMockOne, letterMockTwo };
 
             List<State> states = new List<State>() { stateOneMock };
-            DfaController dfaController = new DfaController();
+            IDfaController dfaController = new DfaController();
 
             // act
             bool isDfa = dfaController.IsDfa(states, alphabetMock);

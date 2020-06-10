@@ -48,12 +48,22 @@
   <ItemGroup>
     <Compile Include="Controllers\DfaConverterController.cs" />
     <Compile Include="Controllers\FiniteController.cs" />
+    <Compile Include="Controllers\StackController.cs" />
+    <Compile Include="Interfaces\IDfaController.cs" />
+    <Compile Include="Interfaces\IDfaConverterController.cs" />
+    <Compile Include="Interfaces\IFiniteController.cs" />
+    <Compile Include="Interfaces\IParser.cs" />
+    <Compile Include="Interfaces\IParserController.cs" />
+    <Compile Include="Interfaces\IRegularExpressionController.cs" />
+    <Compile Include="Interfaces\IStackController.cs" />
     <Compile Include="Models\AutomataCell.cs" />
     <Compile Include="Models\AutomataRow.cs" />
     <Compile Include="Models\AutomataTable.cs" />
     <Compile Include="Models\RegularExpression.cs" />
     <Compile Include="Controllers\RegularExpressionController.cs" />
+    <Compile Include="Models\Stack.cs" />
     <Compile Include="Models\Trace.cs" />
+    <Compile Include="Models\TransitionStackElement.cs" />
     <Compile Include="Models\Word.cs" />
     <Compile Include="Controllers\DfaController.cs" />
     <Compile Include="Infrastructure\ImageBuilder.cs" />

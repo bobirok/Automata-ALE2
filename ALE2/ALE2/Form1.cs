@@ -1,4 +1,5 @@
 ﻿using ALE2.Controllers;
+using ALE2.Interfaces;
 using ALE2.Models;
 using System;
 using System.Collections.Generic;
@@ -17,16 +18,17 @@ namespace ALE2
     [ExcludeFromCodeCoverage]
     public partial class Form1 : Form
     {
-        private ParserController _parserController;
+        private IParserController _parserController;
         private ImageBuilder _imageBuilder = new ImageBuilder();
-        private DfaController _dfaController = new DfaController();
-        private FiniteController _finiteController;
-        private DfaConverterController _dfaConverterController;
-        private List<State> states;
-        private List<Letter> alphabet;
-        private List<Transition> transitions;
-        private List<Word> words;
-        private AutomataTable automataTable = new AutomataTable();
+        private IDfaController _dfaController = new DfaController();
+        private IFiniteController _finiteController;
+        private IDfaConverterController _dfaConverterController;
+        private List<State> _states;
+        private List<Letter> _alphabet;
+        private Stack _stack;
+        private List<Transition> _transitions;
+        private List<Word> _words;
+        private AutomataTable _automataTable = new AutomataTable();
 
         public Form1()
         {
@@ -42,26 +44,27 @@ namespace ALE2
         {
             string[] lines = richTextBox1.Text.Split('\n');
 
-            alphabet = new List<Letter>();
-            states = new List<State>();
-            transitions = new List<Transition>();
-            words = new List<Word>();
+            _alphabet = new List<Letter>();
+            _stack = new Stack();
+            _states = new List<State>();
+            _transitions = new List<Transition>();
+            _words = new List<Word>();
 
-            this._parserController = new ParserController(alphabet, states, transitions, words);
+            this._parserController = new ParserController(_alphabet, _states, _transitions, _stack, _words);
 
             this._parserController.Parse(lines);
 
-            this._imageBuilder.BuildGraphVizImage(pbAutomata, states, transitions);
+            this._imageBuilder.BuildGraphVizImage(pbAutomata, _states, _transitions);
 
-            bool actualDfa = this._dfaController.IsDfa(states, alphabet);
+            bool actualDfa = this._dfaController.IsDfa(_states, _alphabet);
             this.defineButtonsForUser(actualDfa, btnActual);
 
-            bool expectedDfa = this._parserController.expectedDfa;
+            bool expectedDfa = ((ParserController)this._parserController).expectedDfa;
             this.defineButtonsForUser(expectedDfa, btnExpected);
 
-            this.handleDefiningFinite(transitions, states, this._parserController.expectedFinite);
+            this.handleDefiningFinite(_transitions, _states, ((ParserController)this._parserController).expectedFinite);
 
-            this.checkForWordsExistance(words);
+            this.checkForWordsExistance(_words);
 
             pbAutomata.SizeMode = PictureBoxSizeMode.StretchImage;
         }
@@ -113,7 +116,7 @@ namespace ALE2
         private void btnParseRE_Click(object sender, EventArgs e)
         {
             string formula = tbRegularExpression.Text;
-            RegularExpressionController regularExpressionController = new RegularExpressionController();
+            IRegularExpressionController regularExpressionController = new RegularExpressionController();
 
             RegularExpression root = regularExpressionController.GetNdfaFromRegularExpression(ref formula);
 
@@ -137,7 +140,7 @@ namespace ALE2
 
             this._imageBuilder.BuildGraphVizImage(pbAutomata, states, transitions);
 
-            pbAutomata.SizeMode = PictureBoxSizeMode.StretchImage;
+            btnParse_Click(sender, e);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -153,7 +156,7 @@ namespace ALE2
         private void btnCheckWord_Click(object sender, EventArgs e)
         {
             string wordAsString = tbCheckWord.Text;
-            bool wordExists = this._parserController._parser.WordExists(wordAsString, this.states[0]);
+            bool wordExists = ((ParserController)this._parserController)._parser.WordExists(wordAsString, this._states[0]);
             Word word = new Word(wordAsString, wordExists, true);
             dataGridView1.Rows.Add(word.word, word.expectedWordExistance, word.existsInAutomata);
         }
@@ -188,9 +191,13 @@ namespace ALE2
 
         private void btnConvertToFinite_Click(object sender, EventArgs e)
         {
-            this._dfaConverterController = new DfaConverterController(this.automataTable);
+            this._automataTable = new AutomataTable();
 
-            this._dfaConverterController.convertNfaToTableFormat(this.transitions, this.states, this.alphabet);
+            this._dfaConverterController = new DfaConverterController(this._automataTable, _transitions);
+
+            List<Transition> dfaTransitions = this._dfaConverterController.convertDfaTableToAutomata(this._states, this._alphabet);
+
+            this._imageBuilder.BuildGraphVizImage(pbAutomata, ((DfaConverterController)_dfaConverterController).states, dfaTransitions);
         }
     }
 }

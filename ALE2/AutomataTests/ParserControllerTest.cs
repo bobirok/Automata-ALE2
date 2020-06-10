@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using ALE2;
+using ALE2.Interfaces;
+using ALE2.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace AutomataTests
 {
@@ -12,11 +15,12 @@ namespace AutomataTests
         public void ParseShouldParseGivenString()
         {
             // arrange
+            Mock<Stack> stackMock = new Mock<Stack>();
             List<Letter> alphabet = new List<Letter>();
             List<State> states = new List<State>();
             List<Transition> transitions = new List<Transition>();
             List<Word> words = new List<Word>();
-            ParserController parserController = new ParserController(alphabet, states, transitions, words);
+            IParserController parserController = new ParserController(alphabet, states, transitions, stackMock.Object, words);
             string[] lines = new string[] {"alphabet: ab", "states: S0,S1", "final: S1", "transitions:", "S0,a --> S1", "S1,b --> S0", "end.", "words:", "ab, n", "a, y", "end."};
 
             // act

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Moq;
 using System.Threading.Tasks;
+using ALE2.Interfaces;
 
 namespace AutomataTests
 {
@@ -17,7 +18,7 @@ namespace AutomataTests
         {
             // arrange
             string formula = "a";
-            RegularExpressionController regularExpressionController = new RegularExpressionController();
+            IRegularExpressionController regularExpressionController = new RegularExpressionController();
 
             // act
             RegularExpression regularExpression = regularExpressionController.GetNdfaFromRegularExpression(ref formula);
@@ -34,7 +35,7 @@ namespace AutomataTests
         {
             // arrange
             string formula = ".(a,b)";
-            RegularExpressionController regularExpressionController = new RegularExpressionController();
+            IRegularExpressionController regularExpressionController = new RegularExpressionController();
 
             // act
             RegularExpression regularExpression = regularExpressionController.GetNdfaFromRegularExpression(ref formula);
@@ -51,7 +52,7 @@ namespace AutomataTests
         {
             // arrange
             string formula = "|(a,b)";
-            RegularExpressionController regularExpressionController = new RegularExpressionController();
+            IRegularExpressionController regularExpressionController = new RegularExpressionController();
 
             // act 
             RegularExpression regularExpression = regularExpressionController.GetNdfaFromRegularExpression(ref formula);
@@ -68,7 +69,7 @@ namespace AutomataTests
         {
             // arrange
             string formula = "*(a)";
-            RegularExpressionController regularExpressionController = new RegularExpressionController();
+            IRegularExpressionController regularExpressionController = new RegularExpressionController();
 
             // act 
             RegularExpression regularExpression = regularExpressionController.GetNdfaFromRegularExpression(ref formula);
@@ -85,7 +86,7 @@ namespace AutomataTests
         {
             // arrange
             string formula = "*(|(.(a,b),a))";
-            RegularExpressionController regularExpressionController = new RegularExpressionController();
+            IRegularExpressionController regularExpressionController = new RegularExpressionController();
 
             // act 
             RegularExpression regularExpression = regularExpressionController.GetNdfaFromRegularExpression(ref formula);
@@ -108,7 +109,7 @@ namespace AutomataTests
             List<Transition> transitionsMock = new List<Transition>() { new Transition(stateOneMock, stateTwoMock, letterOneMock),
                                                                         new Transition(stateTwoMock, stateOneMock, letterTwoMock)};
 
-            Mock<RegularExpressionController> regularExpressionController = new Mock<RegularExpressionController>();
+            Mock<IRegularExpressionController> regularExpressionController = new Mock<IRegularExpressionController>();
 
             // act
             regularExpressionController.Setup(_ => _.ExtractStatesFromTransitions(It.IsAny<List<Transition>>())).Returns(statesMock);
@@ -133,7 +134,7 @@ namespace AutomataTests
             Letter letterTwoMock = new Letter('b');
             List<Transition> transitionsMock = new List<Transition>() { new Transition(stateOneMock, stateTwoMock, letterOneMock),
                                                                         new Transition(stateTwoMock, stateOneMock, letterTwoMock)};
-            RegularExpressionController regularExpressionController = new RegularExpressionController();
+            IRegularExpressionController regularExpressionController = new RegularExpressionController();
 
             // act
             List<State> statesResult = regularExpressionController.ExtractStatesFromTransitions(transitionsMock);
@@ -154,7 +155,7 @@ namespace AutomataTests
             Letter letterTwoMock = new Letter('b');
             List<Transition> transitionsMock = new List<Transition>() { new Transition(stateOneMock, stateTwoMock, letterOneMock),
                                                                         new Transition(stateTwoMock, stateOneMock, letterTwoMock)};
-            RegularExpressionController regularExpressionController = new RegularExpressionController();
+            IRegularExpressionController regularExpressionController = new RegularExpressionController();
 
             // act
             List<Letter> statesResult = regularExpressionController.ExtractAlphabetFromTransitions(transitionsMock);

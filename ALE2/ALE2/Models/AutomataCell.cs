@@ -16,5 +16,30 @@ namespace ALE2.Models
             this.statesInCell = new List<State>();
             this.belongsTo = belongsTo;
         }
+
+        public void AddStateToCell(State stateToAdd)
+        {
+            if(!this.statesInCell.Any(_ => _.Equals(stateToAdd)))
+            {
+                this.statesInCell.Add(stateToAdd);
+            }
+        }
+
+        public string AsString()
+        {
+            string cellAsString = "{";
+
+            foreach (State state in statesInCell)
+            {
+                cellAsString += state.data;
+            }
+
+            return cellAsString += "}";
+        }
+
+        public bool Equals(AutomataCell cell)
+        {
+            return this.statesInCell.SequenceEqual(cell.statesInCell);
+        }
     }
 }

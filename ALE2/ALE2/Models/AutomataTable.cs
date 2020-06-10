@@ -14,5 +14,15 @@ namespace ALE2.Models
         {
             this.rows = new List<AutomataRow>();
         }
+
+        public bool Equals(AutomataTable table)
+        {
+            foreach (var row in table.rows)
+            {
+                if(!this.rows.Any(_ => _.Equals(row))) { return false; }
+            }
+
+            return true;
+        }
     }
 }

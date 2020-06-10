@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ALE2.Controllers;
+using ALE2.Interfaces;
+using ALE2.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,31 +9,42 @@ using System.Threading.Tasks;
 
 namespace ALE2
 {
-    public class ParserController
+    public class ParserController : IParserController
     {
-        public Parser _parser { get; }
+        public IParser _parser { get; }
+        private IStackController _stackController;
         private List<Word> _words;
         private List<State> _states;
         public bool expectedDfa { get; set; }
         public bool expectedFinite { get; set; }
+        private bool isWithStack = false;
+        private List<Transition> _transitions;
+        private Stack _stack;
 
         public ParserController(List<Letter> alphabet, List<State> states, List<Transition> transitions, 
-                List<Word> words)
+            Stack stack, List<Word> words)
         {
-            this._parser = new Parser(alphabet, states, transitions);
+            this._parser = new Parser(alphabet, states, transitions, stack);
             this._words = words;
             this._states = states;
+            this._transitions = transitions;
+            this._stack = stack;
         }
 
         public void Parse(string[] lines)
         {
+            if (lines.Any(_ => _.Contains("stack"))) this.isWithStack = true;
             for (int i = 0; i < lines.Length; i++)
             {
                 if (lines[i].Contains("alphabet: "))
                 {
                     string alphabet = lines[i].Substring(10);
                     this._parser.ParseAlphabet(alphabet);
-                } else if (lines[i].Contains("states"))
+                } else if(lines[i].Contains("stack"))
+                {
+                    string stackString = lines[i].Substring(6);
+                    this._parser.ParseStack(stackString);
+                }  else if (lines[i].Contains("states"))
                 {
                     string states = lines[i].Substring(8);
                     this._parser.ParseStates(states);
@@ -53,6 +67,10 @@ namespace ALE2
                 } else if(lines[i].Contains("words"))
                 {
                     i++;
+                    if(this.isWithStack)
+                    {
+                        this._stackController = new StackController(_transitions, _stack);
+                    }
                     this.handleLineWord(lines, i);
                 } else if(lines[i].Contains("finite"))
                 {
@@ -68,7 +86,14 @@ namespace ALE2
             {
                 int endIndex = lines[i].IndexOf(',');
                 string word = lines[i].Substring(0, endIndex);
-                bool wordExists = this._parser.WordExists(word, this._states[0]);
+                bool wordExists;
+                if (!this.isWithStack)
+                {
+                    wordExists = this._parser.WordExists(word, this._states[0]);
+                } else
+                {
+                    wordExists = this._stackController.WordWithStackExists(word, this._states[0], new Stack());
+                }
 
                 while (_parser.IsEscapableChar(lines[i][endIndex]))
                 {

@@ -1,15 +1,16 @@
-alphabet: ba
-states: S6,S4,S2,S3,S0,S1,S5,S7
-final: S7
+alphabet: bca
+states: S8,S0,S2,S3,S4,S5,S6,S7,S1,S9
+final: S9
 transitions: 
-S6,_ --> S4
+S8,_ --> S0
 S2,b --> S3
-S4,_ --> S0
-S4,_ --> S2
-S1,_ --> S5
-S3,_ --> S5
-S0,a --> S1
-S6,_ --> S7
-S5,_ --> S4
+S4,c --> S5
+S6,_ --> S2
+S6,_ --> S4
+S3,_ --> S7
 S5,_ --> S7
+S0,a --> S1
+S8,_ --> S6
+S1,_ --> S9
+S7,_ --> S9
 end.

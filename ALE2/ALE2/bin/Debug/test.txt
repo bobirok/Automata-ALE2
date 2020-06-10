@@ -146,3 +146,138 @@ B,_ --> C
 C,0 --> C
 C,1 --> C
 end.
+
+
+
+alphabet: ab
+states: N0,N1,N2,N3,N4
+final: N0
+transitions:
+N0,_ --> N2
+N0,_ --> N1
+N3,_ --> N1
+N3,_ --> N2
+N1,_ --> N0
+N1,_ --> N2
+N1,_ --> N3
+N2,_ --> N3
+N2,_ --> N0
+N2,_ --> N1
+N3,_ --> N2
+N3,_ --> N0
+N3,_ --> N1
+N2,a --> N4
+N2,b --> N4
+end.
+
+finite: n
+dfa: n
+words:
+,y
+end.
+
+// FROM GEEKS FOR GEEKS
+
+alphabet: ab
+states: A,B,C
+final: C
+transitions:
+A,b --> A
+A,a --> C
+A,_ --> B
+A,a --> B
+B,b --> B
+B,_ --> C
+C,a --> C
+C,b --> C
+end.
+
+alphabet: ab
+states: S1,S2,S3,S4,S5
+final: S3
+transitions:
+S1,a --> S2
+S2,b --> S3
+S2,_ --> S4
+S4,_ --> S5
+S5,_ --> S2
+end.
+
+
+alphabet: ab
+states: N0,N1,N2,N3,N4,N5,N6,N7,N8
+final: N1,N4,N7
+transitions:
+N0,_ --> N1
+N1,_ --> N2
+N2,_ --> N0
+N2,_ --> N3
+N3,a --> N4
+N4,_ --> N5
+N5,b --> N6
+N6,_ --> N7
+N7,_ --> N8
+N8,_ --> N6
+end.
+finite:y
+#words:
+#,y
+#a,y
+#ab,y
+#b,n
+#abb,n
+#aabb,n
+#end.
+
+
+alphabet: ab
+states: N0,N1,N2,N3
+final: N1,N2,N3
+transitions:
+N0,_ --> N1
+N1,_ --> N2
+N2,_ --> N1
+N2,a --> N3
+end.
+finite:y
+
+alphabet: ab
+states: N0,N1,N2,N3,N5
+final: N1,N2
+transitions:
+N0,_ --> N1
+N1,_ --> N2
+N2,a --> N1
+N5,b --> N1
+N3,_ --> N5
+N3,_ --> N2
+N2,_ --> N3
+end.
+finite:n
+
+// FINITE WITH DOUBLE EPSILON LOOPS
+
+alphabet: ab
+states: N0,N1,N2,N3,N4,N6,N7,N8
+final: N1,N4,N7
+transitions:
+N0,_ --> N1
+N1,_ --> N6
+N6,_ --> N7
+N7,_ --> N8
+N8,_ --> N6
+N8,_ --> N2
+N2,_ --> N0
+N2,_ --> N3
+N3,a --> N4
+end.
+dfa: n
+finite:y
+#words:
+#,y
+#a,y
+#ab,y
+#b,n
+#abb,n
+#aabb,n
+#end.

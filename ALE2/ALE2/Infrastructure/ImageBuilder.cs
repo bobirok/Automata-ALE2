@@ -44,15 +44,30 @@ namespace ALE2
 
         private string buildTransitionsString(List<Transition> transitions)
         {
-            string transitionsDot = "\" \"" + " -> " +  "\""+ transitions[0].initialState.data + "\"";
+            string transitionsDot = "";
+
+            if (transitions.Count > 0)
+            {
+                transitionsDot = "\" \"" + " -> " + "\"" + transitions[0].initialState.data + "\"";
+            }
             foreach (Transition transition in transitions)
             {
                 transitionsDot += "\"" + transition.initialState.data + "\"" 
                                   + " -> " + "\"" + transition.destinationState.data + "\""
-                                  + "[label=" + "\"" + transition.connectingLetter.data + "\"" + "]\n";
+                                  + "[label=" + "\"" + transition.connectingLetter.data + getTransitionStackElement(transition) + "\"" + "]\n";
             }
 
             return transitionsDot;
+        }
+
+        private string getTransitionStackElement(Transition transition)
+        {
+            if(transition.transitionStackElement == null)
+            {
+                return "";
+            }
+
+            return " [" + transition.transitionStackElement.outLetter.data + "," + transition.transitionStackElement.inLetter.data + "]";
         }
     }
 }

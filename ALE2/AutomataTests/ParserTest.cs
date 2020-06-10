@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using ALE2;
+using ALE2.Interfaces;
+using ALE2.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -14,9 +16,10 @@ namespace AutomataTests
         {
             // arrange
             List<Letter> alphabet = new List<Letter>();
+            Mock<Stack> stackMock = new Mock<Stack>();
             Mock<List<State>> statesMock = new Mock<List<State>>();
             Mock<List<Transition>> transitionsMock = new Mock<List<Transition>>();
-            Parser parser = new Parser(alphabet, statesMock.Object, transitionsMock.Object);
+            IParser parser = new Parser(alphabet, statesMock.Object, transitionsMock.Object, stackMock.Object);
             string unparsedAlphabet = "abc";
 
             // act
@@ -32,8 +35,9 @@ namespace AutomataTests
             // arrange
             List<State> states = new List<State>();
             Mock<List<Letter>> alphabetMock = new Mock<List<Letter>>();
+            Mock<Stack> stackMock = new Mock<Stack>();
             Mock<List<Transition>> transitionsMock = new Mock<List<Transition>>();
-            Parser parser = new Parser(alphabetMock.Object, states, transitionsMock.Object);
+            IParser parser = new Parser(alphabetMock.Object, states, transitionsMock.Object, stackMock.Object);
             string unparsedStates = "S,A,B,C";
 
             // act
@@ -49,8 +53,9 @@ namespace AutomataTests
             // arrange
             List<State> states = new List<State>() { new State("S"), new State("B") };
             Mock<List<Letter>> alphabetMock = new Mock<List<Letter>>();
+            Mock<Stack> stackMock = new Mock<Stack>();
             Mock<List<Transition>> transitionsMock = new Mock<List<Transition>>();
-            Parser parser = new Parser(alphabetMock.Object, states, transitionsMock.Object);
+            IParser parser = new Parser(alphabetMock.Object, states, transitionsMock.Object, stackMock.Object);
             string unparsedFinalStates = "B";
 
             // act
@@ -65,10 +70,11 @@ namespace AutomataTests
         public void parseTransitionsShouldParseTransitions()
         {
             // arrange
+            Mock<Stack> stackMock = new Mock<Stack>();
             List<Letter> alphabet = new List<Letter>() { new Letter('a'), new Letter('b') };
             List<State> states = new List<State>() { new State("S"), new State("B") };
             List<Transition> transitions = new List<Transition>();
-            Parser parser = new Parser(alphabet, states, transitions);
+            IParser parser = new Parser(alphabet, states, transitions, stackMock.Object);
             string unparsedTransition = "S,a --> B ";
 
             // act
@@ -85,13 +91,14 @@ namespace AutomataTests
         public void wordExistsShouldReturnTrueWhenWordExists()
         {
             // arrange
+            Mock<Stack> stackMock = new Mock<Stack>();
             Letter letter = new Letter('a');
             State stateOne = new State("S");
             State stateTwo = new State("B");
             List<Letter> alphabet = new List<Letter>() { letter };
             List<State> states = new List<State>(){ stateOne, stateTwo };
             List<Transition> transitions = new List<Transition>(){ new Transition(stateOne, stateTwo, letter)};
-            Parser parser = new Parser(alphabet, states, transitions);
+            IParser parser = new Parser(alphabet, states, transitions, stackMock.Object);
             string word = "a";
 
             // act
@@ -107,13 +114,14 @@ namespace AutomataTests
         public void wordExistsShouldReturnFalseWhenWordDoesNotExist()
         {
             // arrange
+            Mock<Stack> stackMock = new Mock<Stack>();
             Letter letter = new Letter('a');
             State stateOne = new State("S");
             State stateTwo = new State("B");
             List<Letter> alphabet = new List<Letter>() { letter };
             List<State> states = new List<State>() { stateOne, stateTwo };
             List<Transition> transitions = new List<Transition>() { new Transition(stateOne, stateTwo, letter) };
-            Parser parser = new Parser(alphabet, states, transitions);
+            Parser parser = new Parser(alphabet, states, transitions, stackMock.Object);
             string word = "b";
 
             // act
@@ -129,6 +137,7 @@ namespace AutomataTests
         public void wordExistsShouldReturnTrueWhenWordExistsWithMultipleTransitions()
         {
             // arrange
+            Mock<Stack> stackMock = new Mock<Stack>();
             Letter letter = new Letter('a');
             State stateOne = new State("S");
             State stateTwo = new State("B");
@@ -136,7 +145,7 @@ namespace AutomataTests
             List<State> states = new List<State>() { stateOne, stateTwo };
             List<Transition> transitions = new List<Transition>() { new Transition(stateOne, stateTwo, letter), 
                                                                     new Transition(stateOne, stateOne, letter) };
-            Parser parser = new Parser(alphabet, states, transitions);
+            IParser parser = new Parser(alphabet, states, transitions, stackMock.Object);
             string word = "a";
 
             // act
@@ -152,6 +161,7 @@ namespace AutomataTests
         public void wordExistsShouldReturnFalseWhenWordDoesNotExistWithMultipleTransitions()
         {
             // arrange
+            Mock<Stack> stackMock = new Mock<Stack>();
             Letter letter = new Letter('a');
             State stateOne = new State("S");
             State stateTwo = new State("B");
@@ -159,7 +169,7 @@ namespace AutomataTests
             List<State> states = new List<State>() { stateOne, stateTwo };
             List<Transition> transitions = new List<Transition>() { new Transition(stateOne, stateTwo, letter),
                                                                     new Transition(stateOne, stateOne, letter) };
-            Parser parser = new Parser(alphabet, states, transitions);
+            Parser parser = new Parser(alphabet, states, transitions, stackMock.Object);
             string word = "b";
 
             // act

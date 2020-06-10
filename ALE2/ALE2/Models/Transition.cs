@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ALE2.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace ALE2
         public State initialState { get; set; }
         public State destinationState { get; set; }
         public Letter connectingLetter { get; set; }
+        public TransitionStackElement transitionStackElement { get; set; }
 
         public Transition(State initialState, State destinationState, Letter connectionLetter)
         {

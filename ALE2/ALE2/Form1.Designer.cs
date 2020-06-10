@@ -68,30 +68,27 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(24, 54);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 28);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(430, 773);
+            this.richTextBox1.Size = new System.Drawing.Size(217, 404);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // lblFunction
             // 
             this.lblFunction.AutoSize = true;
-            this.lblFunction.Location = new System.Drawing.Point(24, 17);
-            this.lblFunction.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblFunction.Location = new System.Drawing.Point(12, 9);
             this.lblFunction.Name = "lblFunction";
-            this.lblFunction.Size = new System.Drawing.Size(101, 25);
+            this.lblFunction.Size = new System.Drawing.Size(51, 13);
             this.lblFunction.TabIndex = 1;
             this.lblFunction.Text = "Function:";
             this.lblFunction.Click += new System.EventHandler(this.label1_Click);
             // 
             // pbAutomata
             // 
-            this.pbAutomata.Location = new System.Drawing.Point(532, 98);
-            this.pbAutomata.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pbAutomata.Location = new System.Drawing.Point(266, 51);
             this.pbAutomata.Name = "pbAutomata";
-            this.pbAutomata.Size = new System.Drawing.Size(864, 733);
+            this.pbAutomata.Size = new System.Drawing.Size(432, 381);
             this.pbAutomata.TabIndex = 2;
             this.pbAutomata.TabStop = false;
             this.pbAutomata.Click += new System.EventHandler(this.pbAutomata_Click);
@@ -102,11 +99,9 @@
             this.gbDfa.Controls.Add(this.label2);
             this.gbDfa.Controls.Add(this.btnExpected);
             this.gbDfa.Controls.Add(this.label1);
-            this.gbDfa.Location = new System.Drawing.Point(532, 842);
-            this.gbDfa.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gbDfa.Location = new System.Drawing.Point(266, 438);
             this.gbDfa.Name = "gbDfa";
-            this.gbDfa.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.gbDfa.Size = new System.Drawing.Size(246, 160);
+            this.gbDfa.Size = new System.Drawing.Size(123, 83);
             this.gbDfa.TabIndex = 3;
             this.gbDfa.TabStop = false;
             this.gbDfa.Text = "DFA";
@@ -114,49 +109,44 @@
             // btnActual
             // 
             this.btnActual.Enabled = false;
-            this.btnActual.Location = new System.Drawing.Point(140, 94);
-            this.btnActual.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnActual.Location = new System.Drawing.Point(70, 49);
             this.btnActual.Name = "btnActual";
-            this.btnActual.Size = new System.Drawing.Size(94, 44);
+            this.btnActual.Size = new System.Drawing.Size(47, 23);
             this.btnActual.TabIndex = 5;
             this.btnActual.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 104);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label2.Location = new System.Drawing.Point(10, 54);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 25);
+            this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Actual:";
             // 
             // btnExpected
             // 
             this.btnExpected.Enabled = false;
-            this.btnExpected.Location = new System.Drawing.Point(140, 29);
-            this.btnExpected.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnExpected.Location = new System.Drawing.Point(70, 15);
             this.btnExpected.Name = "btnExpected";
-            this.btnExpected.Size = new System.Drawing.Size(94, 44);
+            this.btnExpected.Size = new System.Drawing.Size(47, 23);
             this.btnExpected.TabIndex = 4;
             this.btnExpected.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 38);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label1.Location = new System.Drawing.Point(7, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 25);
+            this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Expected";
             // 
             // btnParse
             // 
-            this.btnParse.Location = new System.Drawing.Point(30, 846);
-            this.btnParse.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnParse.Location = new System.Drawing.Point(15, 440);
             this.btnParse.Name = "btnParse";
-            this.btnParse.Size = new System.Drawing.Size(428, 94);
+            this.btnParse.Size = new System.Drawing.Size(214, 49);
             this.btnParse.TabIndex = 4;
             this.btnParse.Text = "Parse";
             this.btnParse.UseVisualStyleBackColor = true;
@@ -165,10 +155,9 @@
             // lblWords
             // 
             this.lblWords.AutoSize = true;
-            this.lblWords.Location = new System.Drawing.Point(1402, 38);
-            this.lblWords.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblWords.Location = new System.Drawing.Point(701, 20);
             this.lblWords.Name = "lblWords";
-            this.lblWords.Size = new System.Drawing.Size(80, 25);
+            this.lblWords.Size = new System.Drawing.Size(41, 13);
             this.lblWords.TabIndex = 6;
             this.lblWords.Text = "Words:";
             // 
@@ -176,21 +165,21 @@
             // 
             this.groupBox1.Controls.Add(this.btnParseRE);
             this.groupBox1.Controls.Add(this.tbRegularExpression);
-            this.groupBox1.Location = new System.Drawing.Point(692, 12);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(346, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(552, 77);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(276, 40);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Regular expression";
             // 
             // btnParseRE
             // 
-            this.btnParseRE.Location = new System.Drawing.Point(362, 27);
-            this.btnParseRE.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnParseRE.Location = new System.Drawing.Point(181, 14);
+            this.btnParseRE.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnParseRE.Name = "btnParseRE";
-            this.btnParseRE.Size = new System.Drawing.Size(146, 38);
+            this.btnParseRE.Size = new System.Drawing.Size(73, 20);
             this.btnParseRE.TabIndex = 1;
             this.btnParseRE.Text = "Parse";
             this.btnParseRE.UseVisualStyleBackColor = true;
@@ -198,10 +187,10 @@
             // 
             // tbRegularExpression
             // 
-            this.tbRegularExpression.Location = new System.Drawing.Point(6, 31);
-            this.tbRegularExpression.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbRegularExpression.Location = new System.Drawing.Point(3, 16);
+            this.tbRegularExpression.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbRegularExpression.Name = "tbRegularExpression";
-            this.tbRegularExpression.Size = new System.Drawing.Size(326, 31);
+            this.tbRegularExpression.Size = new System.Drawing.Size(165, 20);
             this.tbRegularExpression.TabIndex = 0;
             // 
             // dataGridView1
@@ -211,12 +200,12 @@
             this.word,
             this.expected,
             this.actual});
-            this.dataGridView1.Location = new System.Drawing.Point(1408, 150);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Location = new System.Drawing.Point(704, 78);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 20;
-            this.dataGridView1.Size = new System.Drawing.Size(708, 277);
+            this.dataGridView1.Size = new System.Drawing.Size(354, 144);
             this.dataGridView1.TabIndex = 8;
             // 
             // word
@@ -247,12 +236,12 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3});
-            this.dataGridViewFiniteWords.Location = new System.Drawing.Point(1406, 571);
-            this.dataGridViewFiniteWords.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewFiniteWords.Location = new System.Drawing.Point(703, 297);
+            this.dataGridViewFiniteWords.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridViewFiniteWords.Name = "dataGridViewFiniteWords";
             this.dataGridViewFiniteWords.RowHeadersWidth = 82;
             this.dataGridViewFiniteWords.RowTemplate.Height = 20;
-            this.dataGridViewFiniteWords.Size = new System.Drawing.Size(708, 256);
+            this.dataGridViewFiniteWords.Size = new System.Drawing.Size(354, 133);
             this.dataGridViewFiniteWords.TabIndex = 9;
             // 
             // dataGridViewTextBoxColumn1
@@ -282,11 +271,9 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.btnFiniteExpected);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(816, 842);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Location = new System.Drawing.Point(408, 438);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.groupBox2.Size = new System.Drawing.Size(246, 160);
+            this.groupBox2.Size = new System.Drawing.Size(123, 83);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Finite";
@@ -294,57 +281,51 @@
             // btnFiniteActual
             // 
             this.btnFiniteActual.Enabled = false;
-            this.btnFiniteActual.Location = new System.Drawing.Point(140, 94);
-            this.btnFiniteActual.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnFiniteActual.Location = new System.Drawing.Point(70, 49);
             this.btnFiniteActual.Name = "btnFiniteActual";
-            this.btnFiniteActual.Size = new System.Drawing.Size(94, 44);
+            this.btnFiniteActual.Size = new System.Drawing.Size(47, 23);
             this.btnFiniteActual.TabIndex = 5;
             this.btnFiniteActual.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 104);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label3.Location = new System.Drawing.Point(10, 54);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 25);
+            this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Actual:";
             // 
             // btnFiniteExpected
             // 
             this.btnFiniteExpected.Enabled = false;
-            this.btnFiniteExpected.Location = new System.Drawing.Point(140, 29);
-            this.btnFiniteExpected.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnFiniteExpected.Location = new System.Drawing.Point(70, 15);
             this.btnFiniteExpected.Name = "btnFiniteExpected";
-            this.btnFiniteExpected.Size = new System.Drawing.Size(94, 44);
+            this.btnFiniteExpected.Size = new System.Drawing.Size(47, 23);
             this.btnFiniteExpected.TabIndex = 4;
             this.btnFiniteExpected.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 38);
-            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label4.Location = new System.Drawing.Point(7, 20);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(102, 25);
+            this.label4.Size = new System.Drawing.Size(52, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "Expected";
             // 
             // tbCheckWord
             // 
-            this.tbCheckWord.Location = new System.Drawing.Point(1408, 98);
-            this.tbCheckWord.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbCheckWord.Location = new System.Drawing.Point(704, 51);
             this.tbCheckWord.Name = "tbCheckWord";
-            this.tbCheckWord.Size = new System.Drawing.Size(264, 31);
+            this.tbCheckWord.Size = new System.Drawing.Size(134, 20);
             this.tbCheckWord.TabIndex = 11;
             // 
             // btnCheckWord
             // 
-            this.btnCheckWord.Location = new System.Drawing.Point(1688, 94);
-            this.btnCheckWord.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnCheckWord.Location = new System.Drawing.Point(844, 49);
             this.btnCheckWord.Name = "btnCheckWord";
-            this.btnCheckWord.Size = new System.Drawing.Size(150, 44);
+            this.btnCheckWord.Size = new System.Drawing.Size(75, 23);
             this.btnCheckWord.TabIndex = 12;
             this.btnCheckWord.Text = "Check";
             this.btnCheckWord.UseVisualStyleBackColor = true;
@@ -352,10 +333,9 @@
             // 
             // btnLoadFromFile
             // 
-            this.btnLoadFromFile.Location = new System.Drawing.Point(30, 946);
-            this.btnLoadFromFile.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnLoadFromFile.Location = new System.Drawing.Point(15, 492);
             this.btnLoadFromFile.Name = "btnLoadFromFile";
-            this.btnLoadFromFile.Size = new System.Drawing.Size(428, 54);
+            this.btnLoadFromFile.Size = new System.Drawing.Size(214, 28);
             this.btnLoadFromFile.TabIndex = 13;
             this.btnLoadFromFile.Text = "Load from file";
             this.btnLoadFromFile.UseVisualStyleBackColor = true;
@@ -363,10 +343,9 @@
             // 
             // btnConvertToFinite
             // 
-            this.btnConvertToFinite.Location = new System.Drawing.Point(1092, 845);
-            this.btnConvertToFinite.Margin = new System.Windows.Forms.Padding(6);
+            this.btnConvertToFinite.Location = new System.Drawing.Point(546, 439);
             this.btnConvertToFinite.Name = "btnConvertToFinite";
-            this.btnConvertToFinite.Size = new System.Drawing.Size(308, 94);
+            this.btnConvertToFinite.Size = new System.Drawing.Size(154, 49);
             this.btnConvertToFinite.TabIndex = 14;
             this.btnConvertToFinite.Text = "Convert to finite";
             this.btnConvertToFinite.UseVisualStyleBackColor = true;
@@ -374,9 +353,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2156, 1004);
+            this.ClientSize = new System.Drawing.Size(1060, 522);
             this.Controls.Add(this.btnConvertToFinite);
             this.Controls.Add(this.btnLoadFromFile);
             this.Controls.Add(this.btnCheckWord);
@@ -391,7 +370,6 @@
             this.Controls.Add(this.pbAutomata);
             this.Controls.Add(this.lblFunction);
             this.Controls.Add(this.richTextBox1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Form1";
             this.Text = "Automata";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ALE2.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ALE2
 {
-    public class DfaController
+    public class DfaController : IDfaController
     {
         public bool IsDfa(List<State> states, List<Letter> alphabet)
         {

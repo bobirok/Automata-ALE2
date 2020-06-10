@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ALE2.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ALE2
 {
-    public class RegularExpressionController
+    public class RegularExpressionController : IRegularExpressionController
     {
         private static int stateCounter = 0;
         public State front { get; set; }
@@ -66,7 +67,7 @@ namespace ALE2
                     + this.getTransitionAsString(transitions);
         }
 
-        public virtual List<State> ExtractStatesFromTransitions(List<Transition> transitions)
+        public List<State> ExtractStatesFromTransitions(List<Transition> transitions)
         {
             List<State> states = new List<State>();
 
@@ -79,7 +80,7 @@ namespace ALE2
             return states.GroupBy(_ => _.data).Select(_ => _.First()).ToList();
         }
 
-        public virtual List<Letter> ExtractAlphabetFromTransitions(List<Transition> transitions)
+        public List<Letter> ExtractAlphabetFromTransitions(List<Transition> transitions)
         {
             List<Letter> alphabet = new List<Letter>();
 

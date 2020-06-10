@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ALE2.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ALE2
 {
-    public class FiniteController
+    public class FiniteController : IFiniteController
     {
-        public List<Trace> traces { get; }
+        public List<Trace> traces { get; private set; }
 
         private List<Transition> _transitions;
 
@@ -42,16 +43,23 @@ namespace ALE2
         {
             if(currentState.isFinalState)
             {
-                this.traces.Add(new Trace(listOfTransitions, initialState));
+                Trace trace = new Trace(listOfTransitions.Select(_ => _.CopyTransition()).ToList(), initialState);
+                trace.transitionIsFinishable = true;
+                this.traces.Add(trace);
             }
 
             List<Transition> possibleTransitions = this._transitions.FindAll(_ => _.initialState.Equals(currentState));
 
-            possibleTransitions = this.removeCyclingTransitions(possibleTransitions, listOfTransitions);
+            if(possibleTransitions.Count == 0) { return; }
 
             foreach (Transition transition in possibleTransitions)
             {
-                List<Transition> transitions = listOfTransitions.Concat(new List<Transition> { transition }).ToList();
+                if(listOfTransitions.Any(_ => _.Equals(transition)))
+                {
+                    continue;
+                }
+
+                List<Transition> transitions = listOfTransitions.Concat(new List<Transition> { transition }).Select(_ => _.CopyTransition()).ToList();
 
                 InstantiateTraces(initialState, transition.destinationState, transitions);
             }
@@ -61,64 +69,75 @@ namespace ALE2
         {
             this.markAllStatesAsNotProcessed();
 
+            this.traces = this.traces.FindAll(_ => _.transitionIsFinishable);
+
             foreach (Trace trace in this.traces)
             {
                 trace.visitedStates.Clear();
 
-                if (!this.traceIsFinite(trace, trace.initialState)) { return false; }
+                if (!this.traceIsFinite(trace, trace.initialState, new List<Transition>(), new List<Transition>())) { return false; }
             }
 
             return true;
         }
 
-        private bool traceIsFinite(Trace trace, State currentState)
+        private bool traceIsFinite(Trace trace, State currentState, 
+            List<Transition> traceCycleTransitions, List<Transition> processedTransitions)
         {
-            currentState.MarkAsProcessed();
+            if(trace.transitionsInTrace.All(_ => _.connectingLetter.data == '_')) { return true; }
 
             trace.visitedStates.Add(currentState);
 
-            if(currentState.outgoingLetters.Count == 0) { return true; }
+            List<Transition> possibleTransitions = trace.transitionsInTrace
+                .FindAll(_ => _.initialState.data == currentState.data);
 
-            if(trace.transitionsInTrace.Any(_ => _.initialState.data == _.destinationState.data)) 
+            if (possibleTransitions.Count == 0)
             {
-                return false;
+                if (traceCycleTransitions.All(_ => _.connectingLetter.data == '_'))
+                {
+                    return currentState.isFinalState;
+                }
+                else
+                {
+                    return false;
+                }
             }
-
-            List<Transition> possibleTransitions = trace.transitionsInTrace.FindAll(_ => _.initialState.data == currentState.data);
-
-            if (possibleTransitions.Count == 0) { return currentState.isFinalState; }
-
-            if(trace.visitedStates.Any(_ => _.data == possibleTransitions[0].destinationState.data)) { return false; }
 
             foreach (Transition transition in possibleTransitions)
             {
-                return traceIsFinite(trace, transition.destinationState);
+                if(processedTransitions.Any(_ => _.Equals(transition))) { continue; }
+
+                processedTransitions.Add(transition);
+
+                if(transition.initialState.Equals(transition.destinationState))
+                {
+                    traceCycleTransitions.Add(transition);
+                    continue;
+                }
+
+                else  if (trace.visitedStates.Any(_ => _.data == transition.destinationState.data))
+                {
+                    int cycleInitialIndex = processedTransitions.FindIndex(_ => _.initialState.Equals(transition.destinationState));
+
+                    int cycleDestinationIndex = processedTransitions.FindLastIndex(_ => _.destinationState.Equals(transition.destinationState));
+
+                    for (int i = cycleInitialIndex; i <= cycleDestinationIndex; i++)
+                    {
+                        traceCycleTransitions.Add(trace.transitionsInTrace[i]);
+                        continue;
+                    }
+                }
+
+                return traceIsFinite(trace, transition.destinationState, traceCycleTransitions, processedTransitions);
             }
 
             return false;
         }
 
-        private List<Transition> removeCyclingTransitions(List<Transition> possibleTransitions, List<Transition> listOfTransitions)
-        {
-            for (int i = possibleTransitions.Count - 1; i >= 0; i--)
-            {
-                if (listOfTransitions.Any(_ => _.initialState.data == possibleTransitions[i].destinationState.data))
-                {
-                    listOfTransitions.Add(possibleTransitions[i]);
-                    possibleTransitions.RemoveAt(i);
-                }
-                else if (possibleTransitions[i].initialState.data == possibleTransitions[i].destinationState.data)
-                {
-                    listOfTransitions.Add(possibleTransitions[i]);
-                    possibleTransitions.RemoveAt(i);
-                }
-            }
-
-            return possibleTransitions;
-        }
-
         private string extractWordFromTrace(Trace trace, State currentState, string wordAsString)
         {
+            if (trace.transitionsInTrace.Any(_ => _.connectingLetter.data == '_')) { return "_"; }
+
             Transition possibleTransition = trace.transitionsInTrace.Find(_ => _.initialState.data == currentState.data);
 
             if (possibleTransition == null) { return wordAsString; }

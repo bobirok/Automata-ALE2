@@ -3,6 +3,8 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ALE2;
+using ALE2.Interfaces;
+
 namespace AutomataTests
 {
     /// <summary>
@@ -21,13 +23,13 @@ namespace AutomataTests
             s3.isFinalState = true;
             Letter l1 = new Letter('a');
             List<Transition> transitions = new List<Transition>() { new Transition(s1, s2, l1), new Transition(s2, s3, l1) };
-            FiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
+            IFiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
 
             // act
             finiteController.InstantiateTraces(s1, s1, new List<Transition>());
 
             // assert
-            Assert.IsTrue(finiteController.traces.Count == 1);
+            Assert.IsTrue(((FiniteController)finiteController).traces.Count == 1);
         }
 
         [TestMethod]
@@ -60,7 +62,7 @@ namespace AutomataTests
             s3.isFinalState = true;
             Letter l1 = new Letter('a');
             List<Transition> transitions = new List<Transition>() { new Transition(s1, s2, l1), new Transition(s2, s3, l1) };
-            FiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
+            IFiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
 
             // act
             finiteController.InstantiateTraces(s1, s1, new List<Transition>());
@@ -81,7 +83,7 @@ namespace AutomataTests
             s3.isFinalState = true;
             List<Transition> transitions = new List<Transition>() { new Transition(s1, s2, l1), new Transition(s2, s3, l1),
                 new Transition(s2, s2, l1), new Transition(s2, s1, l1) };
-            FiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
+            IFiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
 
             // act
             finiteController.InstantiateTraces(s1, s1, new List<Transition>());
@@ -105,7 +107,7 @@ namespace AutomataTests
             s3.outgoingLetters.Add(l1);
             List<Transition> transitions = new List<Transition>() { new Transition(s1, s2, l1), new Transition(s2, s3, l1),
                 new Transition(s2, s2, l1), new Transition(s2, s1, l1) };
-            FiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
+            IFiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
 
             // act
             finiteController.InstantiateTraces(s1, s1, new List<Transition>());
@@ -125,7 +127,7 @@ namespace AutomataTests
             s3.isFinalState = true;
             Letter l1 = new Letter('a');
             List<Transition> transitions = new List<Transition>() { new Transition(s1, s2, l1), new Transition(s2, s3, l1) };
-            FiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
+            IFiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
 
             // act
             finiteController.InstantiateTraces(s1, s1, new List<Transition>());

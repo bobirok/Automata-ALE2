@@ -12,7 +12,6 @@ namespace ALE2.Controllers
 
         private AutomataTable _automataTable;
         private List<Transition> _transitions;
-        private List<List<State>> processedStateSets = new List<List<State>>();
 
         public DfaConverterController(AutomataTable automataTable, List<Transition> transitions) 
         {
@@ -74,19 +73,19 @@ namespace ALE2.Controllers
         {
             this.convertNfaToTableFormat(states, alphabet);
 
-            //return generateDfaTableFromNfa(this._automataTable, alphabet);
             List<AutomataCell> stack = new List<AutomataCell>() { this._automataTable.rows[0].cells[0] };
-            return generateDfaTableFromNfa2(stack, alphabet);
+
+            return generateDfaTableFromNfa(stack, alphabet);
         }
 
-        public AutomataTable generateDfaTableFromNfa2(List<AutomataCell> cellsStack, List<Letter> alphabet)
+        public AutomataTable generateDfaTableFromNfa(List<AutomataCell> cellsStack, List<Letter> alphabet)
         {
             AutomataTable table = new AutomataTable();
 
             return recursiveTableCreation(table, cellsStack, alphabet);
         }
 
-        public void convertNfaToTableFormat(List<State> states, List<Letter> alphabet)
+        private void convertNfaToTableFormat(List<State> states, List<Letter> alphabet)
         {
             foreach (State state in states)
             {

@@ -67,7 +67,7 @@ namespace ALE2
                     + this.getTransitionAsString(transitions);
         }
 
-        public List<State> ExtractStatesFromTransitions(List<Transition> transitions)
+        public virtual List<State> ExtractStatesFromTransitions(List<Transition> transitions)
         {
             List<State> states = new List<State>();
 
@@ -80,7 +80,7 @@ namespace ALE2
             return states.GroupBy(_ => _.data).Select(_ => _.First()).ToList();
         }
 
-        public List<Letter> ExtractAlphabetFromTransitions(List<Transition> transitions)
+        public virtual List<Letter> ExtractAlphabetFromTransitions(List<Transition> transitions)
         {
             List<Letter> alphabet = new List<Letter>();
 

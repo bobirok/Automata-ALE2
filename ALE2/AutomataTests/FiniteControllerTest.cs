@@ -49,7 +49,7 @@ namespace AutomataTests
             finiteController.InstantiateTraces(s1, s1, new List<Transition>());
 
             // assert
-            Assert.IsTrue(finiteController.traces.Count == 1);
+            Assert.IsTrue(finiteController.traces.Count == 2);
         }
 
         [TestMethod]

@@ -281,3 +281,19 @@ finite:y
 #abb,n
 #aabb,n
 #end.
+
+// Convert to finite
+alphabet: ab
+states: S1,S2,S3,S4,S5
+final: S2,S5
+transitions:
+S1,_ --> S2
+S1,a --> S2
+S2,b --> S3
+S2,a --> S3
+S3,a --> S2
+S3,_ --> S1
+S3, b --> S4
+S4,_ --> S2
+S4,b -->S5
+end.

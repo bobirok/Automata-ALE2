@@ -8,7 +8,7 @@ namespace ALE2.Models
 {
     public class AutomataTable
     {
-        public List<AutomataRow> rows { get; private set; }
+        public List<AutomataRow> rows { get; set; }
 
         public AutomataTable()
         {

@@ -13,8 +13,6 @@ namespace ALE2.Interfaces
 
         AutomataTable produceDfaTable(List<State> states, List<Letter> alphabet);
 
-        AutomataTable generateDfaTableFromNfa2(List<AutomataCell> cellsStack, List<Letter> alphabet);
-
-        void convertNfaToTableFormat(List<State> states, List<Letter> alphabet);
+        AutomataTable generateDfaTableFromNfa(List<AutomataCell> cellsStack, List<Letter> alphabet);
     }
 }

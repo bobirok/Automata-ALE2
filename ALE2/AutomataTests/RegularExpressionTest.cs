@@ -109,7 +109,7 @@ namespace AutomataTests
             List<Transition> transitionsMock = new List<Transition>() { new Transition(stateOneMock, stateTwoMock, letterOneMock),
                                                                         new Transition(stateTwoMock, stateOneMock, letterTwoMock)};
 
-            Mock<IRegularExpressionController> regularExpressionController = new Mock<IRegularExpressionController>();
+            Mock<RegularExpressionController> regularExpressionController = new Mock<RegularExpressionController>();
 
             // act
             regularExpressionController.Setup(_ => _.ExtractStatesFromTransitions(It.IsAny<List<Transition>>())).Returns(statesMock);

@@ -51,7 +51,9 @@ namespace ALE2.Controllers
             else
             {
                 List<Transition> possibleTransitions = this._transitions.FindAll(_ => (_.initialState.data == currentState.data
-                    && _.connectingLetter.data == word[0]) || (_.initialState.data == currentState.data && _.connectingLetter.data == epsilon));
+                    && _.connectingLetter.data == word[0]) || (_.initialState.data == currentState.data && 
+                    _.connectingLetter.data == epsilon));
+
                 if (possibleTransitions.Count > 1)
                 {
                     return this.handleMultipleWordTransitions(word, possibleTransitions, stack);
@@ -62,7 +64,9 @@ namespace ALE2.Controllers
                         !possibleTransitions[0].transitionStackElement.outLetter
                         .Equals(stack.getCurrentTopStack())) ||
                         (possibleTransitions[0].transitionStackElement.outLetter.data != epsilon &&
-                        stack.elements.Count == 0))
+                        stack.elements.Count == 0) ||
+                        (possibleTransitions[0].transitionStackElement.inLetter.data != epsilon &&
+                        !stack.possibleElements.Any(_ => _.Equals(possibleTransitions[0].transitionStackElement.inLetter))))
                     {
                         return false;
                     }
@@ -99,7 +103,9 @@ namespace ALE2.Controllers
                         transition.transitionStackElement.outLetter.data != '_' &&
                         !transition.transitionStackElement.outLetter.Equals(copyStack.getCurrentTopStack()) ||
                         (transition.transitionStackElement.outLetter.data != epsilon &&
-                        copyStack.elements.Count == 0)) continue;
+                        copyStack.elements.Count == 0) ||
+                        (transition.transitionStackElement.inLetter.data != epsilon &&
+                        !this._stack.possibleElements.Any(_ => _.Equals(transition.transitionStackElement.inLetter)))) continue;
 
                     if (transition.transitionStackElement.outLetter.data != epsilon)
                     {

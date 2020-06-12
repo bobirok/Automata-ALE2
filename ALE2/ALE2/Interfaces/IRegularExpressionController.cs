@@ -15,7 +15,5 @@ namespace ALE2.Interfaces
         List<State> ExtractStatesFromTransitions(List<Transition> transitions);
 
         List<Letter> ExtractAlphabetFromTransitions(List<Transition> transitions);
-
-
     }
 }

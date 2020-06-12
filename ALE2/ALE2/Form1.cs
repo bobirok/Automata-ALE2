@@ -83,6 +83,7 @@ namespace ALE2
         private void checkForWordsExistance(List<Word> words)
         {
             dataGridView1.Rows.Clear();
+
             foreach (Word word in words)
             {
                 dataGridView1.Rows.Add(word.word, word.expectedWordExistance, word.existsInAutomata);

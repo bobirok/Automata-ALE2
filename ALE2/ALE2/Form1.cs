@@ -3,14 +3,9 @@ using ALE2.Interfaces;
 using ALE2.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ALE2
@@ -71,10 +66,11 @@ namespace ALE2
 
         private void defineButtonsForUser(bool check, Button button)
         {
-            if(check)
+            if (check)
             {
                 button.BackColor = Color.Green;
-            } else
+            }
+            else
             {
                 button.BackColor = Color.Red;
             }
@@ -196,7 +192,7 @@ namespace ALE2
 
             this._dfaConverterController = new DfaConverterController(this._automataTable, _transitions);
 
-            List<Transition> dfaTransitions = this._dfaConverterController.convertDfaTableToAutomata(this._states, this._alphabet);
+            List<Transition> dfaTransitions = this._dfaConverterController.ConvertDfaTableToAutomata(this._states, this._alphabet);
 
             this._imageBuilder.BuildGraphVizImage(pbAutomata, ((DfaConverterController)_dfaConverterController).states, dfaTransitions);
         }

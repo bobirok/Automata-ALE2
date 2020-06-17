@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ALE2.Models
 {
@@ -17,7 +13,7 @@ namespace ALE2.Models
             this.possibleElements = new List<Letter>();
         }
 
-        public void pushToStack(Letter letter)
+        public void PushToStack(Letter letter)
         {
             if (letter.data != '_')
             {
@@ -25,28 +21,36 @@ namespace ALE2.Models
             }
         }
 
-        public bool isEmpty()
+        public bool IsEmpty()
         {
             return this.elements.Count == 0;
         }
 
-        public Letter getCurrentTopStack()
+        public Letter GetCurrentTopStack()
         {
             return this.elements[elements.Count - 1];
         }
 
-        public void popStack()
+        public void PopStack()
         {
-            this.elements.RemoveAt(this.elements.Count - 1);
+            if (this.elements.Count > 0)
+            {
+                this.elements.RemoveAt(this.elements.Count - 1);
+            }
         }
 
-        public Stack copyStack()
+        public Stack CopyStack()
         {
             Stack copyStack = new Stack();
 
             foreach (Letter letter in this.elements)
             {
-                copyStack.pushToStack(letter.CopyLetter());
+                copyStack.PushToStack(letter.CopyLetter());
+            }
+
+            foreach (Letter letter in this.possibleElements)
+            {
+                copyStack.possibleElements.Add(letter.CopyLetter());
             }
 
             return copyStack;

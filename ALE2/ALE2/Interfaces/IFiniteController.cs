@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ALE2.Interfaces
 {
@@ -12,6 +8,6 @@ namespace ALE2.Interfaces
 
         void InstantiateTraces(State initialState, State currentState, List<Transition> listOfTransitions);
 
-        bool AutomataIsFinite();        
+        bool AutomataIsFinite();
     }
 }

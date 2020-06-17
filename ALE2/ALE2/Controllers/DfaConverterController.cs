@@ -1,6 +1,5 @@
 ﻿using ALE2.Interfaces;
 using ALE2.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,20 +12,20 @@ namespace ALE2.Controllers
         private AutomataTable _automataTable;
         private List<Transition> _transitions;
 
-        public DfaConverterController(AutomataTable automataTable, List<Transition> transitions) 
+        public DfaConverterController(AutomataTable automataTable, List<Transition> transitions)
         {
             this._automataTable = automataTable;
             this._transitions = transitions;
             this.states = new List<State>();
         }
 
-        public List<Transition> convertDfaTableToAutomata(List<State> states, List<Letter> alphabet)
+        public List<Transition> ConvertDfaTableToAutomata(List<State> states, List<Letter> alphabet)
         {
             List<State> statesCopy = states.Select(_ => _.CopyState()).ToList();
             List<State> dfaStates = new List<State>();
             List<Letter> alphabetCopy = alphabet.Select(_ => _.CopyLetter()).ToList();
 
-            AutomataTable table = this.produceDfaTable(statesCopy, alphabetCopy);
+            AutomataTable table = this.ProduceDfaTable(statesCopy, alphabetCopy);
 
             List<Transition> transitions = new List<Transition>();
 
@@ -36,10 +35,10 @@ namespace ALE2.Controllers
             {
                 foreach (AutomataCell cell in row.cells)
                 {
-                    if(!dfaStates.Any(_ => _.data == cell.AsString()))
+                    if (!dfaStates.Any(_ => _.data == cell.AsString()))
                     {
                         State cellState = new State(cell.AsString());
-                        if(cell.statesInCell.Any(_ => _.isFinalState)) { cellState.isFinalState = true; }
+                        if (cell.statesInCell.Any(_ => _.isFinalState)) { cellState.isFinalState = true; }
                         dfaStates.Add(cellState);
                     }
                 }
@@ -69,16 +68,16 @@ namespace ALE2.Controllers
 
         }
 
-        public AutomataTable produceDfaTable(List<State> states, List<Letter> alphabet)
+        public AutomataTable ProduceDfaTable(List<State> states, List<Letter> alphabet)
         {
             this.convertNfaToTableFormat(states, alphabet);
 
             List<AutomataCell> stack = new List<AutomataCell>() { this._automataTable.rows[0].cells[0] };
 
-            return generateDfaTableFromNfa(stack, alphabet);
+            return GenerateDfaTableFromNfa(stack, alphabet);
         }
 
-        public AutomataTable generateDfaTableFromNfa(List<AutomataCell> cellsStack, List<Letter> alphabet)
+        public AutomataTable GenerateDfaTableFromNfa(List<AutomataCell> cellsStack, List<Letter> alphabet)
         {
             AutomataTable table = new AutomataTable();
 
@@ -118,7 +117,7 @@ namespace ALE2.Controllers
 
         private AutomataTable recursiveTableCreation(AutomataTable table, List<AutomataCell> cellsStack, List<Letter> alphabet)
         {
-            if(cellsStack.Count == 0) { return table; }
+            if (cellsStack.Count == 0) { return table; }
 
             foreach (AutomataCell cell in cellsStack.ToList())
             {
@@ -206,11 +205,11 @@ namespace ALE2.Controllers
 
         private List<State> getEClosureStates(State current, List<State> states)
         {
-           if (!states.Any(_ => _.data == current.data))
-           {
+            if (!states.Any(_ => _.data == current.data))
+            {
                 states.Add(current);
-           }
-            
+            }
+
 
             List<Transition> possibleTransitions = this._transitions.FindAll(_ => _.initialState.data == current.data &&
                 _.connectingLetter.data == '_');

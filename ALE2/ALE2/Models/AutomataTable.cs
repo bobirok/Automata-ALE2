@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ALE2.Models
 {
@@ -13,16 +10,6 @@ namespace ALE2.Models
         public AutomataTable()
         {
             this.rows = new List<AutomataRow>();
-        }
-
-        public bool Equals(AutomataTable table)
-        {
-            foreach (var row in table.rows)
-            {
-                if(!this.rows.Any(_ => _.Equals(row))) { return false; }
-            }
-
-            return true;
         }
     }
 }

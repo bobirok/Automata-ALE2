@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using ALE2;
+﻿using ALE2;
 using ALE2.Interfaces;
 using ALE2.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
 
 namespace AutomataTests
 {
@@ -96,8 +95,8 @@ namespace AutomataTests
             State stateOne = new State("S");
             State stateTwo = new State("B");
             List<Letter> alphabet = new List<Letter>() { letter };
-            List<State> states = new List<State>(){ stateOne, stateTwo };
-            List<Transition> transitions = new List<Transition>(){ new Transition(stateOne, stateTwo, letter)};
+            List<State> states = new List<State>() { stateOne, stateTwo };
+            List<Transition> transitions = new List<Transition>() { new Transition(stateOne, stateTwo, letter) };
             IParser parser = new Parser(alphabet, states, transitions, stackMock.Object);
             string word = "a";
 
@@ -143,7 +142,7 @@ namespace AutomataTests
             State stateTwo = new State("B");
             List<Letter> alphabet = new List<Letter>() { letter };
             List<State> states = new List<State>() { stateOne, stateTwo };
-            List<Transition> transitions = new List<Transition>() { new Transition(stateOne, stateTwo, letter), 
+            List<Transition> transitions = new List<Transition>() { new Transition(stateOne, stateTwo, letter),
                                                                     new Transition(stateOne, stateOne, letter) };
             IParser parser = new Parser(alphabet, states, transitions, stackMock.Object);
             string word = "a";

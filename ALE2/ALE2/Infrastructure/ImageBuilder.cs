@@ -52,7 +52,7 @@ namespace ALE2
             }
             foreach (Transition transition in transitions)
             {
-                transitionsDot += "\"" + transition.initialState.data + "\"" 
+                transitionsDot += "\"" + transition.initialState.data + "\""
                                   + " -> " + "\"" + transition.destinationState.data + "\""
                                   + "[label=" + "\"" + transition.connectingLetter.data + getTransitionStackElement(transition) + "\"" + "]\n";
             }
@@ -62,7 +62,7 @@ namespace ALE2
 
         private string getTransitionStackElement(Transition transition)
         {
-            if(transition.transitionStackElement == null)
+            if (transition.transitionStackElement == null)
             {
                 return "";
             }

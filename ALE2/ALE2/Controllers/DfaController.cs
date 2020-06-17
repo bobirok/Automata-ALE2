@@ -1,5 +1,4 @@
 ﻿using ALE2.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,12 +12,12 @@ namespace ALE2
 
             foreach (State state in states)
             {
-                if(state.outgoingLetters.Intersect(alphabet).ToList().Count != alphabet.Count)
+                if (state.outgoingLetters.Intersect(alphabet).ToList().Count != alphabet.Count)
                 {
                     return false;
                 }
 
-                if(state.outgoingLetters.Count != state.outgoingLetters.Distinct().Count())
+                if (state.outgoingLetters.Count != state.outgoingLetters.Distinct().Count())
                 {
                     return false;
                 }

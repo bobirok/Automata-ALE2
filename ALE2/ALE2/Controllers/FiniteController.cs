@@ -1,9 +1,6 @@
 ﻿using ALE2.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ALE2
 {
@@ -12,8 +9,6 @@ namespace ALE2
         public List<Trace> traces { get; private set; }
 
         private List<Transition> _transitions;
-
-        private State _lastConnetctionState { get; set; }
 
         public FiniteController(List<Trace> traces, List<Transition> transitions)
         {
@@ -25,7 +20,7 @@ namespace ALE2
         {
             List<Word> words = new List<Word>();
 
-            if(this.AutomataIsFinite())
+            if (this.AutomataIsFinite())
             {
                 this.markAllStatesAsNotProcessed();
 
@@ -41,7 +36,7 @@ namespace ALE2
 
         public void InstantiateTraces(State initialState, State currentState, List<Transition> listOfTransitions)
         {
-            if(currentState.isFinalState)
+            if (currentState.isFinalState)
             {
                 Trace trace = new Trace(listOfTransitions.Select(_ => _.CopyTransition()).ToList(), initialState);
                 trace.transitionIsFinishable = true;
@@ -50,11 +45,11 @@ namespace ALE2
 
             List<Transition> possibleTransitions = this._transitions.FindAll(_ => _.initialState.Equals(currentState));
 
-            if(possibleTransitions.Count == 0) { return; }
+            if (possibleTransitions.Count == 0) { return; }
 
             foreach (Transition transition in possibleTransitions)
             {
-                if(listOfTransitions.Any(_ => _.Equals(transition)))
+                if (listOfTransitions.Any(_ => _.Equals(transition)))
                 {
                     continue;
                 }
@@ -81,10 +76,10 @@ namespace ALE2
             return true;
         }
 
-        private bool traceIsFinite(Trace trace, State currentState, 
+        private bool traceIsFinite(Trace trace, State currentState,
             List<Transition> traceCycleTransitions, List<Transition> processedTransitions)
         {
-            if(trace.transitionsInTrace.All(_ => _.connectingLetter.data == '_')) { return true; }
+            if (trace.transitionsInTrace.All(_ => _.connectingLetter.data == '_')) { return true; }
 
             trace.visitedStates.Add(currentState);
 
@@ -105,17 +100,17 @@ namespace ALE2
 
             foreach (Transition transition in possibleTransitions)
             {
-                if(processedTransitions.Any(_ => _.Equals(transition))) { continue; }
+                if (processedTransitions.Any(_ => _.Equals(transition))) { continue; }
 
                 processedTransitions.Add(transition);
 
-                if(transition.initialState.Equals(transition.destinationState))
+                if (transition.initialState.Equals(transition.destinationState))
                 {
                     traceCycleTransitions.Add(transition);
                     continue;
                 }
 
-                else  if (trace.visitedStates.Any(_ => _.data == transition.destinationState.data))
+                else if (trace.visitedStates.Any(_ => _.data == transition.destinationState.data))
                 {
                     int cycleInitialIndex = processedTransitions.FindIndex(_ => _.initialState.Equals(transition.destinationState));
 

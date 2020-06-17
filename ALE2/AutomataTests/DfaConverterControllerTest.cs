@@ -3,11 +3,8 @@ using ALE2.Controllers;
 using ALE2.Interfaces;
 using ALE2.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomataTests
 {
@@ -37,7 +34,7 @@ namespace AutomataTests
                 new Transition(s3, s1, new Letter('_')),
                 new Transition(s3, s4, b),
                 new Transition(s4, s2, new Letter('_')),
-                new Transition(s4, s5, b) 
+                new Transition(s4, s5, b)
             };
 
             AutomataTable table = new AutomataTable();
@@ -45,11 +42,13 @@ namespace AutomataTests
             IDfaConverterController dfaConverterController = new DfaConverterController(table, transitions);
 
             // act
-            AutomataTable result = dfaConverterController.produceDfaTable(new List<State>() { s1, s2, s3, s4, s5 },
+            AutomataTable result = dfaConverterController.ProduceDfaTable(new List<State>() { s1, s2, s3, s4, s5 },
                     new List<Letter>() { a, b });
             result.rows = result.rows.Distinct().ToList();
+
             // assert
             Assert.AreEqual(12, result.rows.Count);
+            Assert.AreEqual("{S1S2}", result.rows[0].cells[0].AsString());
         }
     }
 }

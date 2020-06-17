@@ -1,10 +1,7 @@
 ﻿using ALE2.Interfaces;
 using ALE2.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ALE2.Controllers
 {
@@ -24,7 +21,7 @@ namespace ALE2.Controllers
         {
             if (word.Length == 0)
             {
-                if (currentState.isFinalState && stack.isEmpty())
+                if (currentState.isFinalState && stack.IsEmpty())
                 {
                     return true;
                 }
@@ -33,100 +30,60 @@ namespace ALE2.Controllers
                     return false;
                 }
             }
-            if (!this.stateContainsLetter(currentState, word[0]) || word[0] == epsilon)
-            {
-                if (this.stateContainsLetter(currentState, epsilon))
-                {
-                    List<Transition> possibleTransitions = this._transitions.FindAll(_ => _.initialState.data == currentState.data
-                        && _.connectingLetter.data == epsilon);
 
-                    return this.handleMultipleWordTransitions(word, possibleTransitions, stack);
-                }
-                return false;
-            }
-            if (!currentState.outgoingLetters.Any(_ => _.data == word[0]))
-            {
-                return false;
-            }
-            else
-            {
-                List<Transition> possibleTransitions = this._transitions.FindAll(_ => (_.initialState.data == currentState.data
-                    && _.connectingLetter.data == word[0]) || (_.initialState.data == currentState.data && 
-                    _.connectingLetter.data == epsilon));
+            List<Transition> possibleTransitions = this._transitions.FindAll(_ =>
+                ((_.initialState.Equals(currentState) &&
+                (_.connectingLetter.data == word[0] || _.connectingLetter.data == epsilon))));
 
-                if (possibleTransitions.Count > 1)
-                {
-                    return this.handleMultipleWordTransitions(word, possibleTransitions, stack);
-                }
-                else
-                {
-                    if ((stack.elements.Count > 0 &&
-                        !possibleTransitions[0].transitionStackElement.outLetter
-                        .Equals(stack.getCurrentTopStack())) ||
-                        (possibleTransitions[0].transitionStackElement.outLetter.data != epsilon &&
-                        stack.elements.Count == 0) ||
-                        (possibleTransitions[0].transitionStackElement.inLetter.data != epsilon &&
-                        !stack.possibleElements.Any(_ => _.Equals(possibleTransitions[0].transitionStackElement.inLetter))))
-                    {
-                        return false;
-                    }
-                    else
-                    {
+            this.prioritiseTransitions(possibleTransitions, word[0]);
 
-                        if (stack.elements.Count > 0 &&
-                            possibleTransitions[0].transitionStackElement.outLetter.data != epsilon)
-                        {
-                            stack.popStack();
-                        }
-
-                        stack.pushToStack(possibleTransitions[0].transitionStackElement.inLetter);
-
-                        currentState = possibleTransitions[0].destinationState;
-
-                        return WordWithStackExists(word.Substring(1), currentState, stack);
-                    }
-                }
-            }
+            return handleTransitions(word, possibleTransitions, stack.CopyStack());
         }
 
-        private bool handleMultipleWordTransitions(string word, List<Transition> transitions, Stack stack)
+        private bool handleTransitions(string word, List<Transition> possibleTransitions, Stack stack)
         {
-            transitions = prioritiseTransitions(transitions, word[0]);
-
-            foreach (Transition transition in transitions)
+            foreach (Transition transition in possibleTransitions)
             {
-                Stack copyStack = stack.copyStack();
+                if (transition.transitionStackElement != null &&
+                        (stack.elements.Count > 0 &&
+                        transition.transitionStackElement.outLetter.data != epsilon &&
+                        !(transition.transitionStackElement.outLetter.Equals(stack.GetCurrentTopStack())) ||
+                        (transition.transitionStackElement.outLetter.data != epsilon &&
+                        stack.elements.Count == 0) ||
+                        (transition.transitionStackElement.inLetter.data != epsilon &&
+                        !this._stack.possibleElements.Any(_ => _.Equals(transition.transitionStackElement.inLetter))))) continue;
+
+                if (stack.elements.Count > 0 ||
+                        (transition.transitionStackElement != null &&
+                        transition.transitionStackElement.outLetter.data == epsilon))
+                {
+                    if (transition.transitionStackElement != null)
+                    {
+                        if (transition.transitionStackElement.outLetter.data != epsilon)
+                        {
+                            stack.PopStack();
+                        }
+                    }
+                }
 
                 if (transition.transitionStackElement != null)
                 {
-                    if (copyStack.elements.Count > 0 &&
-                        transition.transitionStackElement.outLetter.data != '_' &&
-                        !transition.transitionStackElement.outLetter.Equals(copyStack.getCurrentTopStack()) ||
-                        (transition.transitionStackElement.outLetter.data != epsilon &&
-                        copyStack.elements.Count == 0) ||
-                        (transition.transitionStackElement.inLetter.data != epsilon &&
-                        !this._stack.possibleElements.Any(_ => _.Equals(transition.transitionStackElement.inLetter)))) continue;
-
-                    if (transition.transitionStackElement.outLetter.data != epsilon)
-                    {
-                        copyStack.popStack();
-                    }
-
-                    copyStack.pushToStack(transition.transitionStackElement.inLetter);
+                    stack.PushToStack(transition.transitionStackElement.inLetter);
                 }
-                if (WordWithStackExists(word.Substring(1), transition.destinationState, copyStack))
+
+                if (WordWithStackExists(word.Substring(1), transition.destinationState, stack.CopyStack())) return true;
+                else
                 {
-                    return true;
-                }
-            }
-            return false;
-        }
+                    if (transition.transitionStackElement != null)
+                    {
+                        stack.PushToStack(transition.transitionStackElement.outLetter);
 
-        private bool stateContainsLetter(State currentState, char letterToCheck)
-        {
-            if (currentState.outgoingLetters.Any(_ => _.data == letterToCheck))
-            {
-                return true;
+                        if (transition.transitionStackElement.inLetter.data != epsilon)
+                        {
+                            stack.PopStack();
+                        }
+                    }
+                }
             }
 
             return false;
@@ -134,10 +91,10 @@ namespace ALE2.Controllers
 
         private List<Transition> prioritiseTransitions(List<Transition> possibleTransitions, char currentSymbol)
         {
-            List<Transition> firstPriority = possibleTransitions.FindAll(_ => 
+            List<Transition> firstPriority = possibleTransitions.FindAll(_ =>
                 _.transitionStackElement != null &&
                 this._stack.elements.Count > 0 &&
-                (!this._stack.isEmpty() ? _.transitionStackElement.outLetter.Equals(this._stack.getCurrentTopStack()) : false) && 
+                (!this._stack.IsEmpty() ? _.transitionStackElement.outLetter.Equals(this._stack.GetCurrentTopStack()) : false) &&
                 _.connectingLetter.data == currentSymbol);
 
             List<Transition> secondPriority = possibleTransitions.FindAll(_ =>
@@ -149,7 +106,7 @@ namespace ALE2.Controllers
                 _.transitionStackElement != null &&
                 this._stack.elements.Count > 0 &&
                 _.connectingLetter.data == epsilon &&
-                (!this._stack.isEmpty() ? _.transitionStackElement.outLetter.Equals(this._stack.getCurrentTopStack()) : false));;
+                (!this._stack.IsEmpty() ? _.transitionStackElement.outLetter.Equals(this._stack.GetCurrentTopStack()) : false)); ;
 
             List<Transition> fourthPriority = possibleTransitions.FindAll(_ =>
                 _.connectingLetter.data == epsilon &&

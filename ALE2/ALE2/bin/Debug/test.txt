@@ -229,7 +229,6 @@ finite:y
 #aabb,n
 #end.
 
-
 alphabet: ab
 states: N0,N1,N2,N3
 final: N1,N2,N3
@@ -297,3 +296,40 @@ S3, b --> S4
 S4,_ --> S2
 S4,b -->S5
 end.
+
+// PDA
+# Regular Expression: *(|(a,b))
+alphabet: ab
+stack: x
+states: N0,N1,N2
+final: N2
+transitions:
+N0,_[_,x] --> N0
+N0,a[x,_] --> N1
+N1,b[x,_] --> N2
+end.
+
+dfa: y
+finite: y
+words:
+ab,y
+end.
+
+// PDA
+
+# Regular Expression: *(|(a,b))
+alphabet: ab
+states: N0,N1,N2
+stack: x
+final: N2
+transitions:
+N0,_[_,x] --> N1
+N1,_[x,_] --> N0
+N1,a --> N2
+end.
+
+finite: n
+dfa: n
+words:
+aa,y
+end;

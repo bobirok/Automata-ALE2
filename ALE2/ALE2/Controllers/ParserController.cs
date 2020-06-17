@@ -1,11 +1,8 @@
 ﻿using ALE2.Controllers;
 using ALE2.Interfaces;
 using ALE2.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ALE2
 {
@@ -21,7 +18,7 @@ namespace ALE2
         private List<Transition> _transitions;
         private Stack _stack;
 
-        public ParserController(List<Letter> alphabet, List<State> states, List<Transition> transitions, 
+        public ParserController(List<Letter> alphabet, List<State> states, List<Transition> transitions,
             Stack stack, List<Word> words)
         {
             this._parser = new Parser(alphabet, states, transitions, stack);
@@ -40,19 +37,23 @@ namespace ALE2
                 {
                     string alphabet = lines[i].Substring(10);
                     this._parser.ParseAlphabet(alphabet);
-                } else if(lines[i].Contains("stack"))
+                }
+                else if (lines[i].Contains("stack"))
                 {
                     string stackString = lines[i].Substring(6);
                     this._parser.ParseStack(stackString);
-                }  else if (lines[i].Contains("states"))
+                }
+                else if (lines[i].Contains("states"))
                 {
                     string states = lines[i].Substring(8);
                     this._parser.ParseStates(states);
-                } else if (lines[i].Contains("final"))
+                }
+                else if (lines[i].Contains("final"))
                 {
                     string final = lines[i].Substring(7);
                     this._parser.ParseFinalStates(final);
-                } else if (lines[i].Contains("transitions"))
+                }
+                else if (lines[i].Contains("transitions"))
                 {
                     i++;
                     while (!lines[i].Contains("end"))
@@ -60,19 +61,22 @@ namespace ALE2
                         this._parser.ParseTransition(lines[i]);
                         i++;
                     }
-                } else if(lines[i].Contains("dfa"))
+                }
+                else if (lines[i].Contains("dfa"))
                 {
                     string dfa = lines[i].Substring(5);
                     this.expectedDfa = this.parseExpectedValue(dfa[0]);
-                } else if(lines[i].Contains("words"))
+                }
+                else if (lines[i].Contains("words"))
                 {
                     i++;
-                    if(this.isWithStack)
+                    if (this.isWithStack)
                     {
                         this._stackController = new StackController(_transitions, _stack);
                     }
                     this.handleLineWord(lines, i);
-                } else if(lines[i].Contains("finite"))
+                }
+                else if (lines[i].Contains("finite"))
                 {
                     string finite = lines[i].Substring(6);
                     this.expectedFinite = this._parser.ParseFinite(finite);
@@ -90,9 +94,10 @@ namespace ALE2
                 if (!this.isWithStack)
                 {
                     wordExists = this._parser.WordExists(word, this._states[0]);
-                } else
+                }
+                else
                 {
-                    wordExists = this._stackController.WordWithStackExists(word, this._states[0], new Stack());
+                    wordExists = this._stackController.WordWithStackExists(word, this._states[0], this._stack.CopyStack());
                 }
 
                 while (_parser.IsEscapableChar(lines[i][endIndex]))
@@ -111,13 +116,7 @@ namespace ALE2
 
         private bool parseExpectedValue(char expectedInChar)
         {
-            if(expectedInChar == 'y')
-            {
-                return true;
-            } else
-            {
-                return false;
-            }
+            return expectedInChar == 'y';
         }
     }
 }

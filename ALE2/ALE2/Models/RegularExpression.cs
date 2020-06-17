@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ALE2
 {
@@ -14,7 +9,7 @@ namespace ALE2
         public State initial { get; set; }
         public State final { get; set; }
 
-        public RegularExpression(Letter letter) 
+        public RegularExpression(Letter letter)
         {
             this.letter = letter;
         }

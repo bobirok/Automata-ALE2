@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ALE2
 {
@@ -19,12 +17,12 @@ namespace ALE2
         public Trace initialTrace { get; set; }
 
 
-        public Trace(List<Transition> transitionsInTrace, State initialState) 
+        public Trace(List<Transition> transitionsInTrace, State initialState)
         {
             this.transitionsInTrace = transitionsInTrace;
             this.initialState = initialState;
             this.visitedStates = new List<State>();
-        } 
+        }
 
         public Trace CopyTrace()
         {

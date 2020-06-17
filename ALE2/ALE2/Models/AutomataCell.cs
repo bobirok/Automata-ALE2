@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ALE2.Models
 {
@@ -19,7 +16,7 @@ namespace ALE2.Models
 
         public void AddStateToCell(State stateToAdd)
         {
-            if(!this.statesInCell.Any(_ => _.Equals(stateToAdd)))
+            if (!this.statesInCell.Any(_ => _.Equals(stateToAdd)))
             {
                 this.statesInCell.Add(stateToAdd);
             }

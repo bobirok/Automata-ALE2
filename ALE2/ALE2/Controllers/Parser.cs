@@ -67,6 +67,9 @@ namespace ALE2
                 for (int i = 0; i < finalStatesString.Length; i++)
                 {
                     finalState = "";
+
+                    if (IsEscapableChar(finalStatesString[i])) continue;
+
                     while (i < finalStatesString.Length && !IsEscapableChar(finalStatesString[i]))
                     {
                         finalState += finalStatesString[i];
@@ -74,7 +77,8 @@ namespace ALE2
                     }
                     this._states.Find(_ => _.data == finalState).isFinalState = true;
                 }
-            } catch(NullReferenceException)
+            }
+            catch (NullReferenceException)
             {
                 MessageBox.Show("Please provide a valid state");
             }
@@ -88,16 +92,17 @@ namespace ALE2
 
             for (int k = 0; k < transitionString.Length; k++)
             {
-                if(IsEscapableChar(transitionString[k])) continue; 
-                if(isStateChar(transitionString[k]) && transition.initialState == null && transition.destinationState == null)
+                if (IsEscapableChar(transitionString[k])) continue;
+                if (isStateChar(transitionString[k]) && transition.initialState == null && transition.destinationState == null)
                 {
-                    while(k < transitionString.Length && !IsEscapableChar(transitionString[k]))
+                    while (k < transitionString.Length && !IsEscapableChar(transitionString[k]))
                     {
                         initalStateString += transitionString[k];
                         k++;
                     }
                     transition.initialState = this._states.Find(_ => _.data == initalStateString);
-                } else if(isStateChar(transitionString[k]) && transition.initialState != null && transition.destinationState == null)
+                }
+                else if (isStateChar(transitionString[k]) && transition.initialState != null && transition.destinationState == null)
                 {
                     while (k < transitionString.Length && !IsEscapableChar(transitionString[k]))
                     {
@@ -105,16 +110,20 @@ namespace ALE2
                         k++;
                     }
                     transition.destinationState = this._states.Find(_ => _.data == finalStateString);
-                } else if(isLetterChar(transitionString[k]) && transition.connectingLetter == null)
+                }
+                else if (isLetterChar(transitionString[k]) && transition.connectingLetter == null)
                 {
                     letter = transitionString[k];
                     transition.connectingLetter = this._alphabet.Find(_ => _.data == letter);
-                } else if(isEpsilon(transitionString[k])) {
+                }
+                else if (isEpsilon(transitionString[k]))
+                {
                     Letter epsilonLetter = new Letter(epsilon);
                     transition.connectingLetter = epsilonLetter;
                     this._alphabet.Add(epsilonLetter);
                     letter = epsilonLetter.data;
-                } else if(transitionString[k] == '[')
+                }
+                else if (transitionString[k] == '[')
                 {
                     char outStackElement = transitionString[k + 1];
                     char inStackElement = transitionString[k + 3];
@@ -133,12 +142,13 @@ namespace ALE2
 
         public bool WordExists(string word, State currentState)
         {
-            if (word.Length == 0) 
+            if (word.Length == 0)
             {
-                if(currentState.isFinalState)
+                if (currentState.isFinalState)
                 {
                     return true;
-                } else
+                }
+                else
                 {
                     return false;
                 }
@@ -154,13 +164,14 @@ namespace ALE2
                 }
                 return false;
             }
-            if (!currentState.outgoingLetters.Any(_ => _.data == word[0])) {
-               
-                return false; 
+            if (!currentState.outgoingLetters.Any(_ => _.data == word[0]))
+            {
+
+                return false;
             }
             else
             {
-                List<Transition> possibleTransitions = this._transitions.FindAll(_ => (_.initialState.data == currentState.data 
+                List<Transition> possibleTransitions = this._transitions.FindAll(_ => (_.initialState.data == currentState.data
                     && _.connectingLetter.data == word[0]) || (_.initialState.data == currentState.data && _.connectingLetter.data == epsilon));
                 if (possibleTransitions.Count > 1)
                 {
@@ -218,7 +229,7 @@ namespace ALE2
 
         private bool isStateChar(char charToCheck)
         {
-            if(charToCheck >= 'A' && charToCheck <= 'Z')
+            if (charToCheck >= 'A' && charToCheck <= 'Z')
             {
                 return true;
             }
@@ -228,7 +239,7 @@ namespace ALE2
 
         private bool isLetterChar(char charToCheck)
         {
-            if((charToCheck >= 'a' && charToCheck <= 'z') || (charToCheck >= '0' && charToCheck <= '9'))
+            if ((charToCheck >= 'a' && charToCheck <= 'z') || (charToCheck >= '0' && charToCheck <= '9'))
             {
                 return true;
             }
@@ -238,17 +249,12 @@ namespace ALE2
 
         private bool isEpsilon(char charToCheck)
         {
-            if(charToCheck == '_')
-            {
-                return true;
-            }
-
-            return false;
+            return charToCheck == '_';
         }
 
         private bool stateContainsLetter(State currentState, char letterToCheck)
         {
-            if(currentState.outgoingLetters.Any(_ => _.data == letterToCheck))
+            if (currentState.outgoingLetters.Any(_ => _.data == letterToCheck))
             {
                 return true;
             }

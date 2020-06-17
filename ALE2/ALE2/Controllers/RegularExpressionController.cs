@@ -1,10 +1,6 @@
 ﻿using ALE2.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ALE2
 {
@@ -18,15 +14,16 @@ namespace ALE2
         {
             stateCounter = 0;
         }
-        
+
         public RegularExpression GetNdfaFromRegularExpression(ref string formula)
         {
-            if(isLetterChar(formula[0]))
+            if (isLetterChar(formula[0]))
             {
                 Letter letter = new Letter(formula[0]);
 
                 return this.letterRule(letter);
-            } else if(formula[0] == '.')
+            }
+            else if (formula[0] == '.')
             {
                 formula = formula.Substring(1);
                 RegularExpression firstRegularExpression = this.GetNdfaFromRegularExpression(ref formula);
@@ -35,7 +32,8 @@ namespace ALE2
                 RegularExpression secondRegularExpression = this.GetNdfaFromRegularExpression(ref formula);
 
                 return this.andRule(firstRegularExpression, secondRegularExpression);
-            } else if(formula[0] == '|')
+            }
+            else if (formula[0] == '|')
             {
                 formula = formula.Substring(1);
                 RegularExpression firstRegularExpression = this.GetNdfaFromRegularExpression(ref formula);
@@ -44,13 +42,15 @@ namespace ALE2
                 RegularExpression secondRegularExpression = this.GetNdfaFromRegularExpression(ref formula);
 
                 return this.orRule(firstRegularExpression, secondRegularExpression);
-            } else if(formula[0] == '*')
+            }
+            else if (formula[0] == '*')
             {
                 formula = formula.Substring(1);
                 RegularExpression firstRegularExpression = this.GetNdfaFromRegularExpression(ref formula);
 
                 return starRule(firstRegularExpression);
-            } else
+            }
+            else
             {
                 formula = formula.Substring(1);
                 return GetNdfaFromRegularExpression(ref formula);
@@ -229,7 +229,7 @@ namespace ALE2
 
             for (int i = 0; i < transitions.Count; i++)
             {
-                transitionsString += transitions[i].initialState.data + "," + transitions[i].connectingLetter.data + 
+                transitionsString += transitions[i].initialState.data + "," + transitions[i].connectingLetter.data +
                                     " --> " + transitions[i].destinationState.data + "\n";
             }
 

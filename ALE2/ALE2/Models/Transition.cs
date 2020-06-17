@@ -1,9 +1,5 @@
 ﻿using ALE2.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ALE2
 {
@@ -30,9 +26,9 @@ namespace ALE2
         {
             Transition transition = obj as Transition;
 
-            if(!this.destinationState.Equals(transition.destinationState)) { return false; }
-            if(!this.initialState.Equals(transition.initialState)) { return false; }
-            if(!this.connectingLetter.Equals(transition.connectingLetter)) { return false; }
+            if (!this.destinationState.Equals(transition.destinationState)) { return false; }
+            if (!this.initialState.Equals(transition.initialState)) { return false; }
+            if (!this.connectingLetter.Equals(transition.connectingLetter)) { return false; }
 
             return true;
         }

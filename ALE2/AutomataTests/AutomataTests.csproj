@@ -67,6 +67,7 @@
     <Compile Include="ParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegularExpressionTest.cs" />
+    <Compile Include="StackControllerTest.cs" />
     <Compile Include="StateTest.cs" />
     <Compile Include="DfaControllerTest.cs" />
     <Compile Include="ParserControllerTest.cs" />

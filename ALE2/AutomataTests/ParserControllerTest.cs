@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using ALE2;
+﻿using ALE2;
 using ALE2.Interfaces;
 using ALE2.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
 
 namespace AutomataTests
 {
@@ -21,7 +20,7 @@ namespace AutomataTests
             List<Transition> transitions = new List<Transition>();
             List<Word> words = new List<Word>();
             IParserController parserController = new ParserController(alphabet, states, transitions, stackMock.Object, words);
-            string[] lines = new string[] {"alphabet: ab", "states: S0,S1", "final: S1", "transitions:", "S0,a --> S1", "S1,b --> S0", "end.", "words:", "ab, n", "a, y", "end."};
+            string[] lines = new string[] { "alphabet: ab", "states: S0,S1", "final: S1", "transitions:", "S0,a --> S1", "S1,b --> S0", "end.", "words:", "ab, n", "a, y", "end." };
 
             // act
             parserController.Parse(lines);

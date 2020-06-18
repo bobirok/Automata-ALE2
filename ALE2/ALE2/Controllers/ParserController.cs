@@ -97,7 +97,7 @@ namespace ALE2
                 }
                 else
                 {
-                    wordExists = this._stackController.WordWithStackExists(word, this._states[0], this._stack.CopyStack());
+                    wordExists = this._stackController.WordWithStackExists(word, this._states[0], this._stack.CopyStack(), new List<Transition>());
                 }
 
                 while (_parser.IsEscapableChar(lines[i][endIndex]))

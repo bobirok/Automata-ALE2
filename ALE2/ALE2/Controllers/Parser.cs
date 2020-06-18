@@ -142,47 +142,21 @@ namespace ALE2
 
         public bool WordExists(string word, State currentState)
         {
-            if (word.Length == 0)
-            {
-                if (currentState.isFinalState)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            if (!this.stateContainsLetter(currentState, word[0]) || word[0] == epsilon)
-            {
-                if (this.stateContainsLetter(currentState, epsilon))
-                {
-                    List<Transition> possibleTransitions = this._transitions.FindAll(_ => _.initialState.data == currentState.data
-                        && _.connectingLetter.data == epsilon);
+            return this.WordIsAccepted(word, currentState);
+        }
 
-                    return this.handleMultipleWordTransitions(word, possibleTransitions);
-                }
-                return false;
-            }
-            if (!currentState.outgoingLetters.Any(_ => _.data == word[0]))
+        private bool WordIsAccepted(string word, State currentState)
+        {
+            if(word.Length == 0)
             {
+                return currentState.isFinalState;
+            }
 
-                return false;
-            }
-            else
-            {
-                List<Transition> possibleTransitions = this._transitions.FindAll(_ => (_.initialState.data == currentState.data
-                    && _.connectingLetter.data == word[0]) || (_.initialState.data == currentState.data && _.connectingLetter.data == epsilon));
-                if (possibleTransitions.Count > 1)
-                {
-                    return this.handleMultipleWordTransitions(word, possibleTransitions);
-                }
-                else
-                {
-                    currentState = possibleTransitions[0].destinationState;
-                    return WordExists(word.Substring(1), currentState);
-                }
-            }
+            List<Transition> possibleTransitions = this._transitions.FindAll(_ =>
+                (_.connectingLetter.data == word[0] || _.connectingLetter.data == epsilon)
+                && _.initialState.Equals(currentState));
+
+            return this.handleMultipleWordTransitions(word, possibleTransitions);
         }
 
         public bool IsEscapableChar(char charToCheck)
@@ -211,7 +185,7 @@ namespace ALE2
         {
             foreach (Transition transition in transitions)
             {
-                if (WordExists(word.Substring(1), transition.destinationState))
+                if (WordExists(transition.connectingLetter.data == epsilon ? word : word.Substring(1), transition.destinationState))
                 {
                     return true;
                 }

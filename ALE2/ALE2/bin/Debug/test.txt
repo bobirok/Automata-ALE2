@@ -333,3 +333,20 @@ dfa: n
 words:
 aa,y
 end;
+
+
+alphabet: ab
+stack:x
+states: N0,N1,N2
+final: N2
+transitions:
+N0,a[_,x] --> N0
+N0,a[x,_] --> N1
+N1,b[x,_] --> N2
+end.
+
+dfa: y
+finite: y
+words:
+aaab,y
+end.

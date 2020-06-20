@@ -1,5 +1,7 @@
 ﻿using ALE2;
+using ALE2.Controllers;
 using ALE2.Interfaces;
+using ALE2.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -41,13 +43,13 @@ namespace AutomataTests
             Letter l1 = new Letter('a');
             List<Transition> transitions = new List<Transition>() { new Transition(s1, s2, l1), new Transition(s2, s3, l1),
                 new Transition(s2, s2, l1), new Transition(s2, s1, l1) };
-            FiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
+            IFiniteController finiteController = new FiniteController(new List<Trace>(), transitions);
 
             // act
             finiteController.InstantiateTraces(s1, s1, new List<Transition>());
 
             // assert
-            Assert.IsTrue(finiteController.traces.Count == 2);
+            Assert.IsTrue(((FiniteController)finiteController).traces.Count == 2);
         }
 
         [TestMethod]

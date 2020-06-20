@@ -1,4 +1,6 @@
-﻿namespace ALE2.Interfaces
+﻿using ALE2.Models;
+
+namespace ALE2.Interfaces
 {
     public interface IParser
     {

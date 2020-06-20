@@ -1,8 +1,9 @@
-﻿using ALE2;
+﻿using ALE2.Models;
 using ALE2.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
+using ALE2.Controllers;
 
 namespace AutomataTests
 {

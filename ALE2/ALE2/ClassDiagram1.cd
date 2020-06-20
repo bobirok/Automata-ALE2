@@ -1,39 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="ALE2.DfaController" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="8.25" Y="0.5" Width="1.5" />
+  <Class Name="ALE2.DfaController" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Controllers\DfaController.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ALE2.FiniteController" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="3" Y="1.5" Width="1.5" />
+  <Class Name="ALE2.FiniteController" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="7" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAACAAAAgAAAAAAAHAEEAAAAAAAIAAAABAAAAA=</HashCode>
+      <HashCode>AAAAAAAACAAAAgAAAAAAAHAEEAAAAAAAAAAAABAAAAA=</HashCode>
       <FileName>Controllers\FiniteController.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ALE2.Parser" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="10" Y="1.5" Width="1.5" />
+  <Class Name="ALE2.Parser" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="7" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>CEAAAgAAAAAAAAgAAAgAABAFAAgAAAAAgBwARAAAARA=</HashCode>
+      <HashCode>CEAAAgAAAAAAAAgAIAgAABAFAAgAAAAAgBwARAAAARA=</HashCode>
       <FileName>Controllers\Parser.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ALE2.ParserController" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="3" Y="2.5" Width="1.5" />
+  <Class Name="ALE2.ParserController" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="7" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AEAgAAAAAAAAABAAACAIAEAEAAEAAAQEAABAAAAAABA=</HashCode>
       <FileName>Controllers\ParserController.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ALE2.RegularExpressionController" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="8.25" Y="2.5" Width="1.5" />
+  <Class Name="ALE2.RegularExpressionController" BaseTypeListCollapsed="true">
+    <Position X="15.25" Y="7" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAgCACBAAQAAAAAAAAAAiAAAAAAAEgAIBAEAAAkA=</HashCode>
       <FileName>Controllers\RegularExpressionController.cs</FileName>
@@ -41,175 +41,181 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="ALE2.Form1" Collapsed="true">
-    <Position X="4.75" Y="1.5" Width="1.5" />
+    <Position X="2.5" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEwAgAQBADAEABCghAuAwABGMAgAkQhgVCxQQBQCABQ=</HashCode>
       <FileName>Form1.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.ImageBuilder" Collapsed="true">
-    <Position X="6.5" Y="1.5" Width="1.5" />
+    <Position X="8.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AwAAAAAIAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
       <FileName>Infrastructure\ImageBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.Letter" Collapsed="true">
-    <Position X="8.25" Y="1.5" Width="1.5" />
+    <Position X="9.25" Y="13.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAgAgAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Models\Letter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.RegularExpression" Collapsed="true">
-    <Position X="6.5" Y="2.5" Width="1.5" />
+    <Position X="17" Y="13.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAEAEAAAAAAAAAAAAg=</HashCode>
       <FileName>Models\RegularExpression.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.State" Collapsed="true">
-    <Position X="8.25" Y="3.5" Width="1.5" />
+    <Position X="11.25" Y="13.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgQAEAAAACAAAAAAgAAAAAAgAAAAAAAiAAAQAAAAAAA=</HashCode>
       <FileName>Models\State.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.Trace" Collapsed="true">
-    <Position X="10" Y="3.5" Width="1.5" />
+    <Position X="5.5" Y="13.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAAAABEgAAAAAAAAAAAAAAAAAAGAgAAAAA=</HashCode>
       <FileName>Models\Trace.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.Transition" Collapsed="true">
-    <Position X="3" Y="4.5" Width="1.5" />
+    <Position X="7.5" Y="13.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAgAgAAAAAAAAAAQAAAQAAAEAAAAAAA=</HashCode>
       <FileName>Models\Transition.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.Word" Collapsed="true">
-    <Position X="6.5" Y="4.5" Width="1.5" />
+    <Position X="15" Y="13.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAQAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Word.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.Program" Collapsed="true">
-    <Position X="4.75" Y="2.5" Width="1.5" />
+    <Position X="0.5" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.Controllers.DfaConverterController" BaseTypeListCollapsed="true">
-    <Position X="12.5" Y="4.5" Width="2.75" />
+    <Position X="2.5" Y="7" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAAAQAAAAAACIAAAAWBAAAAABEAAAAAgAABAA=</HashCode>
+      <HashCode>AACEAAAAAAQAAAAAAAAAAAA2BAAAAABEAAAAAgAAAAA=</HashCode>
       <FileName>Controllers\DfaConverterController.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ALE2.Controllers.StackController" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="6.5" Y="3.5" Width="1.5" />
+  <Class Name="ALE2.Controllers.StackController" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="7" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAgAABAEAgAAAAAAAAEAAAAAARA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAEAgEAAAAAAgEAAAAAABA=</HashCode>
       <FileName>Controllers\StackController.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="ALE2.Models.AutomataCell" Collapsed="true">
-    <Position X="3" Y="0.5" Width="1.5" />
+    <Position X="2.75" Y="14" Width="1.5" />
+    <Members>
+      <Property Name="statesInCell" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAAgAgAAAACAAACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\AutomataCell.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="statesInCell" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="ALE2.Models.AutomataRow" Collapsed="true">
-    <Position X="4.75" Y="0.5" Width="1.5" />
+    <Position X="2.75" Y="13" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAgAgAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\AutomataRow.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.Models.AutomataTable" Collapsed="true">
-    <Position X="6.5" Y="0.5" Width="1.5" />
+    <Position X="2.75" Y="12" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAgABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\AutomataTable.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.Models.Stack" Collapsed="true">
-    <Position X="4.75" Y="3.5" Width="1.5" />
+    <Position X="13" Y="13.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQACAAAAAAAAABAEAAAAAAAQAAAAAAAAAAAAAAAARAA=</HashCode>
+      <HashCode>AABCAAAAAAAAABAAABAAAEAABAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Models\Stack.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.Models.TransitionStackElement" Collapsed="true">
-    <Position X="4.75" Y="4.5" Width="1.5" />
+    <Position X="7.5" Y="14.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAEAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\TransitionStackElement.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.Properties.Resources" Collapsed="true">
-    <Position X="10" Y="2.5" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="ALE2.Properties.Settings" Collapsed="true">
-    <Position X="3" Y="3.5" Width="1.5" />
+    <Position X="2" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Interface Name="ALE2.Interfaces.IDfaController">
-    <Position X="3" Y="5.75" Width="1.5" />
+  <Interface Name="ALE2.Interfaces.IDfaController" Collapsed="true">
+    <Position X="0.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IDfaController.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ALE2.Interfaces.IDfaConverterController" Collapsed="true">
-    <Position X="4.75" Y="5.75" Width="1.5" />
+    <Position X="3" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAiAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IDfaConverterController.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ALE2.Interfaces.IFiniteController" Collapsed="true">
-    <Position X="6.5" Y="5.75" Width="1.5" />
+    <Position X="5.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAEAAAAAAAAAAAAAAABAAAAA=</HashCode>
       <FileName>Interfaces\IFiniteController.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ALE2.Interfaces.IParser" Collapsed="true">
-    <Position X="8.25" Y="5.75" Width="1.5" />
+    <Position X="8.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAAAAAAAgAAAAAAAABAAgAAAAAgBQAQAAAAAA=</HashCode>
       <FileName>Interfaces\IParser.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="ALE2.Interfaces.IParserController" Collapsed="true">
-    <Position X="10" Y="5.75" Width="1.5" />
+    <Position X="11.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IParserController.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="ALE2.Interfaces.IRegularExpressionController">
-    <Position X="3" Y="6.75" Width="1.5" />
+  <Interface Name="ALE2.Interfaces.IRegularExpressionController" Collapsed="true">
+    <Position X="16" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAQAAAAAAAAAAAAAAAAAAAgAAAAAAAAEA=</HashCode>
       <FileName>Interfaces\IRegularExpressionController.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="ALE2.Interfaces.IStackController">
-    <Position X="5" Y="7.25" Width="1.5" />
+  <Interface Name="ALE2.Interfaces.IStackController" Collapsed="true">
+    <Position X="13.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IStackController.cs</FileName>

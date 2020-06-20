@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using ALE2.Models;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Windows.Forms;
 
-namespace ALE2
+namespace ALE2.Infrastructure
 {
     [ExcludeFromCodeCoverage]
     public class ImageBuilder

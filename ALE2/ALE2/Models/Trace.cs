@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ALE2
+namespace ALE2.Models
 {
     public class Trace
     {

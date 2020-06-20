@@ -1,7 +1,6 @@
 \\vmware-host\Shared Folders\Desktop\Software Engineering\Automata-ALE2\ALE2\ALE2\bin\Debug\ALE2.exe.config
 \\vmware-host\Shared Folders\Desktop\Software Engineering\Automata-ALE2\ALE2\ALE2\bin\Debug\ALE2.exe
 \\vmware-host\Shared Folders\Desktop\Software Engineering\Automata-ALE2\ALE2\ALE2\bin\Debug\ALE2.pdb
-\\vmware-host\Shared Folders\Desktop\Software Engineering\Automata-ALE2\ALE2\ALE2\obj\Debug\ALE2.csprojAssemblyReference.cache
 \\vmware-host\Shared Folders\Desktop\Software Engineering\Automata-ALE2\ALE2\ALE2\obj\Debug\ALE2.Form1.resources
 \\vmware-host\Shared Folders\Desktop\Software Engineering\Automata-ALE2\ALE2\ALE2\obj\Debug\ALE2.Properties.Resources.resources
 \\vmware-host\Shared Folders\Desktop\Software Engineering\Automata-ALE2\ALE2\ALE2\obj\Debug\ALE2.csproj.GenerateResource.cache
@@ -18,3 +17,4 @@ C:\Users\Boris\Desktop\C#\Automata-ALE2\ALE2\ALE2\obj\Debug\ALE2.csproj.Generate
 C:\Users\Boris\Desktop\C#\Automata-ALE2\ALE2\ALE2\obj\Debug\ALE2.csproj.CoreCompileInputs.cache
 C:\Users\Boris\Desktop\C#\Automata-ALE2\ALE2\ALE2\obj\Debug\ALE2.exe
 C:\Users\Boris\Desktop\C#\Automata-ALE2\ALE2\ALE2\obj\Debug\ALE2.pdb
+\\vmware-host\Shared Folders\Desktop\Software Engineering\Automata-ALE2\ALE2\ALE2\obj\Debug\ALE2.csprojAssemblyReference.cache

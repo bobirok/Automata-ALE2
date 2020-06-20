@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ALE2
+namespace ALE2.Models
 {
     public class Letter
     {
@@ -22,6 +22,5 @@ namespace ALE2
 
             return this.data == letter.data;
         }
-
     }
 }

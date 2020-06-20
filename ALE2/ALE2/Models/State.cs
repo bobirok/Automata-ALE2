@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ALE2
+namespace ALE2.Models
 {
     public class State
     {

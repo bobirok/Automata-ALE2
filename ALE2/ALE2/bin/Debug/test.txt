@@ -119,6 +119,17 @@ B,a --> C
 C,a --> C
 end;
 
+//FINITE CASES
+alphabet: ab
+states: S,B,C,D
+final: C,D
+transitions:
+S,a --> B
+B,a --> C
+C,_ --> C
+C,a --> D
+end;
+
 // Test - it does not work
 alphabet: ab
 states: S,B,C

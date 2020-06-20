@@ -1,11 +1,13 @@
 ﻿using ALE2.Interfaces;
+using ALE2.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ALE2
+namespace ALE2.Controllers
 {
     public class DfaController : IDfaController
     {
+
         public bool IsDfa(List<State> states, List<Letter> alphabet)
         {
             if (states.Exists(_ => _.outgoingLetters.Exists(x => x.data == '_'))) { return false; }

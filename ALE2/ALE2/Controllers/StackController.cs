@@ -45,6 +45,8 @@ namespace ALE2.Controllers
         {
             foreach (Transition transition in possibleTransitions)
             {
+                if ((transition.destinationState.isFinalState || transition.initialState.isFinalState) && word.All(_ => _ == epsilon)) return true;
+
                 if (isSkippableTransition(transition, stack)) continue;
 
                 if (stack.elements.Count > 0 ||
@@ -65,12 +67,12 @@ namespace ALE2.Controllers
                     stack.PushToStack(transition.transitionStackElement.inLetter);
                 }
 
-                if (!transition.initialState.Equals(transition.destinationState))
+                if (!transition.initialState.Equals(transition.destinationState) || transition.connectingLetter.data == epsilon)
                 {
                     processedTransitions.Add(transition);
                 }
 
-                if (WordWithStackExists(transition.connectingLetter.data == epsilon ? word :  word.Substring(1),
+                if (WordWithStackExists(transition.connectingLetter.data == epsilon ? word : word.Substring(1),
                        transition.destinationState, stack.CopyStack(), processedTransitions)) return true;
                 else
                 {

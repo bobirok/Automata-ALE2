@@ -1,9 +1,7 @@
-﻿using ALE2;
-using ALE2.Controllers;
+﻿using ALE2.Controllers;
 using ALE2.Interfaces;
 using ALE2.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 
 namespace AutomataTests
@@ -39,7 +37,7 @@ namespace AutomataTests
             parserController.Parse(lines);
 
             // assert
-            Assert.IsTrue(stackController.WordWithStackExists("aa", states[0], stack));
+            Assert.IsFalse(stackController.WordWithStackExists("aa", states[0], stack, new List<Transition>()));
         }
 
         [TestMethod]
@@ -70,7 +68,7 @@ namespace AutomataTests
             parserController.Parse(lines);
 
             // assert
-            Assert.IsFalse(stackController.WordWithStackExists("aa", states[0], stack));
+            Assert.IsFalse(stackController.WordWithStackExists("aa", states[0], stack, new List<Transition>()));
         }
 
         [TestMethod]
@@ -102,12 +100,12 @@ namespace AutomataTests
             parserController.Parse(lines);
 
             // assert
-            Assert.IsTrue(stackController.WordWithStackExists("abcc", states[0], new Stack()));
-            Assert.IsTrue(stackController.WordWithStackExists("aacc", states[0], new Stack()));
-            Assert.IsTrue(stackController.WordWithStackExists("bbbccc", states[0], new Stack()));
-            Assert.IsFalse(stackController.WordWithStackExists("aaabbcccc", states[0], new Stack()));
-            Assert.IsFalse(stackController.WordWithStackExists("aabbccccc", states[0], new Stack()));
-            Assert.IsFalse(stackController.WordWithStackExists("bbaccc", states[0], new Stack()));
+            Assert.IsTrue(stackController.WordWithStackExists("abcc", states[0], new Stack(), new List<Transition>()));
+            Assert.IsTrue(stackController.WordWithStackExists("aacc", states[0], new Stack(), new List<Transition>()));
+            Assert.IsTrue(stackController.WordWithStackExists("bbbccc", states[0], new Stack(), new List<Transition>()));
+            Assert.IsFalse(stackController.WordWithStackExists("aaabbcccc", states[0], new Stack(), new List<Transition>()));
+            Assert.IsFalse(stackController.WordWithStackExists("aabbccccc", states[0], new Stack(), new List<Transition>()));
+            Assert.IsFalse(stackController.WordWithStackExists("bbaccc", states[0], new Stack(), new List<Transition>()));
 
         }
     }

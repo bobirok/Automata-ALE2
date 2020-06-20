@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace ALE2
+namespace ALE2.Controllers
 {
     public class Parser : IParser
     {
@@ -142,21 +142,7 @@ namespace ALE2
 
         public bool WordExists(string word, State currentState)
         {
-            return this.WordIsAccepted(word, currentState);
-        }
-
-        private bool WordIsAccepted(string word, State currentState)
-        {
-            if(word.Length == 0)
-            {
-                return currentState.isFinalState;
-            }
-
-            List<Transition> possibleTransitions = this._transitions.FindAll(_ =>
-                (_.connectingLetter.data == word[0] || _.connectingLetter.data == epsilon)
-                && _.initialState.Equals(currentState));
-
-            return this.handleMultipleWordTransitions(word, possibleTransitions);
+            return this.WordIsAccepted(word, currentState, new List<Transition>());
         }
 
         public bool IsEscapableChar(char charToCheck)
@@ -181,11 +167,29 @@ namespace ALE2
             return expectedFiniteAsString.Contains("y") ? true : false;
         }
 
-        private bool handleMultipleWordTransitions(string word, List<Transition> transitions)
+        private bool WordIsAccepted(string word, State currentState, List<Transition> processedTransitions)
+        {
+            if (word.Length == 0)
+            {
+                return currentState.isFinalState;
+            }
+
+            List<Transition> possibleTransitions = this._transitions.FindAll(_ =>
+                (_.connectingLetter.data == word[0] || _.connectingLetter.data == epsilon)
+                && _.initialState.Equals(currentState));
+
+            return this.handleMultipleWordTransitions(word, possibleTransitions, processedTransitions);
+        }
+
+        private bool handleMultipleWordTransitions(string word, List<Transition> transitions, List<Transition> processedTransitions)
         {
             foreach (Transition transition in transitions)
             {
-                if (WordExists(transition.connectingLetter.data == epsilon ? word : word.Substring(1), transition.destinationState))
+                if (processedTransitions.Any(_ => _.Equals(transition) && transition.connectingLetter.data == epsilon)) continue;
+
+                processedTransitions.Add(transition);
+
+                if (WordIsAccepted(transition.connectingLetter.data == epsilon ? word : word.Substring(1), transition.destinationState, processedTransitions))
                 {
                     return true;
                 }
@@ -224,16 +228,6 @@ namespace ALE2
         private bool isEpsilon(char charToCheck)
         {
             return charToCheck == '_';
-        }
-
-        private bool stateContainsLetter(State currentState, char letterToCheck)
-        {
-            if (currentState.outgoingLetters.Any(_ => _.data == letterToCheck))
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }

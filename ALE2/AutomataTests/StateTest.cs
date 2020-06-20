@@ -1,4 +1,4 @@
-﻿using ALE2;
+﻿using ALE2.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AutomataTests

@@ -1,5 +1,6 @@
 ﻿using ALE2;
 using ALE2.Interfaces;
+using ALE2.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;

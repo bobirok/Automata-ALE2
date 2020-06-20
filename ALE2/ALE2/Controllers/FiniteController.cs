@@ -1,8 +1,9 @@
 ﻿using ALE2.Interfaces;
+using ALE2.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ALE2
+namespace ALE2.Controllers
 {
     public class FiniteController : IFiniteController
     {
@@ -27,7 +28,8 @@ namespace ALE2
                 foreach (Trace trace in this.traces)
                 {
                     string wordAsString = "";
-                    words.Add(new Word(this.extractWordFromTrace(trace, trace.initialState, wordAsString), true, true));
+                    Word word = new Word(this.extractWordFromTrace(trace, trace.initialState, wordAsString, new List<Transition>()), true, true);
+                    if (!words.Any(_ => _.Equals(word))) words.Add(word);
                 }
             }
 
@@ -107,7 +109,7 @@ namespace ALE2
                 if (transition.initialState.Equals(transition.destinationState))
                 {
                     traceCycleTransitions.Add(transition);
-                    continue;
+                    if (transition.destinationState.isFinalState) return transition.connectingLetter.data == '_';
                 }
 
                 else if (trace.visitedStates.Any(_ => _.data == transition.destinationState.data))
@@ -129,17 +131,23 @@ namespace ALE2
             return false;
         }
 
-        private string extractWordFromTrace(Trace trace, State currentState, string wordAsString)
+        private string extractWordFromTrace(Trace trace, State currentState, string wordAsString, List<Transition> processedTransitions)
         {
-            if (trace.transitionsInTrace.Any(_ => _.connectingLetter.data == '_')) { return "_"; }
+            List<Transition> possibleTransitions = trace.transitionsInTrace.FindAll(_ => _.initialState.data == currentState.data &&
+                !processedTransitions.Any(x => x.Equals(_)));
 
-            Transition possibleTransition = trace.transitionsInTrace.Find(_ => _.initialState.data == currentState.data);
+            foreach (Transition possibleTransition in possibleTransitions)
+            {
+                processedTransitions.Add(possibleTransition);
 
-            if (possibleTransition == null) { return wordAsString; }
+                if (possibleTransition.connectingLetter.data != '_')
+                {
+                    wordAsString += possibleTransition.connectingLetter.data;
+                }
 
-            wordAsString += possibleTransition.connectingLetter.data;
-
-            return extractWordFromTrace(trace, possibleTransition.destinationState, wordAsString);
+                return extractWordFromTrace(trace, possibleTransition.destinationState, wordAsString, processedTransitions);
+            }
+            return wordAsString;
         }
 
         private void markAllStatesAsNotProcessed()

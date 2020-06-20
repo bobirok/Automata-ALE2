@@ -1,4 +1,4 @@
-﻿using ALE2;
+﻿using ALE2.Controllers;
 using ALE2.Interfaces;
 using ALE2.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -84,6 +84,33 @@ namespace AutomataTests
             // assert
             Assert.AreEqual(transitions.Count, 1);
             Assert.AreEqual(transition.connectingLetter, connectingLetter);
+        }
+
+        [TestMethod]
+        public void parseStackShouldParseStack()
+        {
+            // arrange
+            string stackString = "xyz";
+
+            Mock<List<Letter>> alphabetMock = new Mock<List<Letter>>();
+            Mock<List<State>> statesMock = new Mock<List<State>>();
+            Mock<List<Transition>> transitionsMock = new Mock<List<Transition>>();
+
+            Stack stack = new Stack();
+
+            IParser parser = new Parser(alphabetMock.Object, statesMock.Object, transitionsMock.Object, stack);
+
+            // act
+            parser.ParseStack(stackString);
+            string result = "";
+
+            foreach (var letter in stack.possibleElements)
+            {
+                result += letter.data;
+            }
+
+            // assert
+            Assert.AreEqual(stackString, result);
         }
 
         [TestMethod]

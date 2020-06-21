@@ -129,7 +129,7 @@ namespace ALE2.Controllers
 
                 foreach (State state in cell.statesInCell)
                 {
-                    initialCellStates.AddRange(getEClosureStates(state, new List<State>()));
+                    initialCellStates.AddRange(getEClosureStates(state, new List<State>(), new List<Transition>()));
                 }
 
                 foreach (State state in initialCellStates)
@@ -171,7 +171,7 @@ namespace ALE2.Controllers
 
             foreach (State state1 in possibleStates)
             {
-                statesWithEClosures.AddRange(getEClosureStates(state1, new List<State>()));
+                statesWithEClosures.AddRange(getEClosureStates(state1, new List<State>(), new List<Transition>()));
             }
 
             foreach (State state1 in statesWithEClosures)
@@ -203,7 +203,7 @@ namespace ALE2.Controllers
             }
         }
 
-        private List<State> getEClosureStates(State current, List<State> states)
+        private List<State> getEClosureStates(State current, List<State> states, List<Transition> processedTransitions)
         {
             if (!states.Any(_ => _.data == current.data))
             {
@@ -212,11 +212,13 @@ namespace ALE2.Controllers
 
 
             List<Transition> possibleTransitions = this._transitions.FindAll(_ => _.initialState.data == current.data &&
-                _.connectingLetter.data == '_');
+                _.connectingLetter.data == '_' &&
+                !processedTransitions.Any(x => x.Equals(_)));
 
             foreach (Transition transition in possibleTransitions)
             {
-                getEClosureStates(transition.destinationState, states);
+                processedTransitions.Add(transition);
+                getEClosureStates(transition.destinationState, states, processedTransitions);
             }
 
             return states;

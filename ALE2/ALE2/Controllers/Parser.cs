@@ -102,7 +102,7 @@ namespace ALE2.Controllers
                     }
                     transition.initialState = this._states.Find(_ => _.data == initalStateString);
                 }
-                else if (isStateChar(transitionString[k]) && transition.initialState != null && transition.destinationState == null)
+                else if (isStateChar(transitionString[k]) && transition.initialState != null && transition.destinationState == null && transition.connectingLetter != null)
                 {
                     while (k < transitionString.Length && !IsEscapableChar(transitionString[k]))
                     {
@@ -207,7 +207,7 @@ namespace ALE2.Controllers
 
         private bool isStateChar(char charToCheck)
         {
-            if (charToCheck >= 'A' && charToCheck <= 'Z')
+            if ((charToCheck >= 'A' && charToCheck <= 'Z') || (charToCheck >= 'a' && charToCheck <= 'z'))
             {
                 return true;
             }

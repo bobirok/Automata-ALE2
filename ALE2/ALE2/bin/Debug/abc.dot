@@ -1,17 +1,14 @@
 digraph myAutomaton {
 rankdir=LR;
 " " [shape=none]
-"{S1}" [shape=circle]
-"{S2S4S5}" [shape=circle]
+"{N0N1N6N7N8N2N3}" [shape=doublecircle]
+"{N4}" [shape=doublecircle]
 "{}" [shape=circle]
-"{S3}" [shape=doublecircle]
 
-" " -> "{S1}""{S1}" -> "{S2S4S5}"[label="a"]
-"{S1}" -> "{}"[label="b"]
-"{S2S4S5}" -> "{}"[label="a"]
-"{S2S4S5}" -> "{S3}"[label="b"]
+" " -> "{N0N1N6N7N8N2N3}""{N0N1N6N7N8N2N3}" -> "{N4}"[label="a"]
+"{N0N1N6N7N8N2N3}" -> "{}"[label="b"]
+"{N4}" -> "{}"[label="a"]
+"{N4}" -> "{}"[label="b"]
 "{}" -> "{}"[label="a"]
 "{}" -> "{}"[label="b"]
-"{S3}" -> "{}"[label="a"]
-"{S3}" -> "{}"[label="b"]
 }
